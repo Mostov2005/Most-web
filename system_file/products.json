@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Носки",
+    "price": 200,
+    "image": "pictures\\Носки.jpg"
+  },
+  {
+    "name": "Удочка",
+    "price": 3000,
+    "image": "pictures\\Удочка.jpg"
+  },
+  {
+    "name": "Резиновая лодка",
+    "price": 5000,
+    "image": "pictures\\Резиновая лодка.jpg"
+  },
+  {
+    "name": "Ручка",
+    "price": 300,
+    "image": "pictures\\Ручка.jpg"
+  },
+  {
+    "name": "Кружка",
+    "price": 100,
+    "image": "pictures\\Кружка.jpg"
+  },
+  {
+    "name": "Видеокарта rtx 2060 super",
+    "price": 20000,
+    "image": "pictures\\Видеокарта rtx 2060 super.jpg"
+  },
+  {
+    "name": "Монитор LOC",
+    "price": 15000,
+    "image": "pictures\\Монитор LOC.jpg"
+  },
+  {
+    "name": "Рюкзак",
+    "price": 999,
+    "image": "pictures\\Рюкзак.png"
+  },
+  {
+    "name": "Гантели (20 кг)",
+    "price": 1999,
+    "image": "pictures\\Гантели.jpg"
+  }
+]

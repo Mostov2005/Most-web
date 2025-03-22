@@ -4,16 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Most-web.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Release v1.0">
+      <change afterPath="$PROJECT_DIR$/pictures/Видеокарта rtx 2060 super.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Гантели.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Крем для рук.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Кружка.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Монитор LOC.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Носки.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Резиновая лодка.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Ручка.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Рюкзак.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pictures/Удочка.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/for_admin.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/for_workers.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/main_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/my_QR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/oformlenie_zakaza.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/plus_balans.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/products.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/registration.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/users.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/welcome.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/Логотип увеличенный.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/Логотип увеличенный.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/Логотип.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Для тестирования/6427781948.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +133,30 @@
       <option name="presentableId" value="Default" />
       <updated>1742666820057</updated>
     </task>
+    <task id="LOCAL-00001" summary="Release v1.0">
+      <option name="closed" value="true" />
+      <created>1742669026640</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742669026640</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Release v1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Release v1.0" />
   </component>
 </project>
