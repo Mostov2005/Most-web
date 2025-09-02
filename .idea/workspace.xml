@@ -5,30 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Release v1.0">
-      <change afterPath="$PROJECT_DIR$/pictures/Видеокарта rtx 2060 super.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Гантели.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Крем для рук.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Кружка.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Монитор LOC.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Носки.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Резиновая лодка.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Ручка.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Рюкзак.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Удочка.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/for_admin.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/for_workers.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/main_window.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/my_QR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/oformlenie_zakaza.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/plus_balans.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/products.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/registration.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/users.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/welcome.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/Логотип увеличенный.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/Логотип увеличенный.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/Логотип.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Для тестирования/6427781948.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/basket.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/password_hasher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/database_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/balance_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/basket_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/product_dialog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/registration_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/welcome_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/worker_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/validators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/sliding_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Most-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Most-web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/users.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,14 +45,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2ugObB0Q5COGxCwctNpfotiFl2C" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -59,14 +66,45 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.1.executor": "Run",
     "Python.2.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.registration_window.executor": "Run",
+    "Python.welcome_window.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "new__structure",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Pycharm Project\Most-web" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.registration_window">
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
@@ -111,8 +149,56 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="registration_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/registration_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="welcome_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/welcome_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.registration_window" />
+        <item itemvalue="Python.welcome_window" />
+        <item itemvalue="Python.1" />
+        <item itemvalue="Python.2" />
         <item itemvalue="Python.2" />
       </list>
     </recent_temporary>

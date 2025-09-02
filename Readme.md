@@ -34,6 +34,58 @@
 - `system_file/` — директория с файлами интерфейсов (`.ui`) и базой данных (`users.json`, `products.json`).
 - `pictures/` — изображения товаров.
 
+
+```
+internet_shop
+│── main.py                     # Точка входа в приложение
+│
+├── core/                       # Логика (модель)
+│   ├── __init__.py
+│   ├── auth.py                 # Авторизация, регистрация, хеширование паролей
+│   ├── products.py             # Работа с товарами (загрузка, добавление, удаление)
+│   ├── users.py                # Работа с пользователями (роль, баланс, изменения)
+│   └── basket.py               # Логика корзины и заказов
+│
+├── database/
+│   ├── __init__.py
+│   └── storage.py              # Чтение/запись users.json, products.json
+│
+├── ui/                         # Визуальные компоненты (виды/экраны)
+│   ├── __init__.py
+│   ├── welcome_window.py       # WelcomeWindow (вход)
+│   ├── registration_window.py  # RegistrationWindow (регистрация)
+│   ├── main_window.py          # MainWindow (главное окно)
+│   ├── basket_window.py        # Oformlenie_Zakaza
+│   ├── balance_window.py       # Poplnenie_balansa
+│   ├── admin_window.py         # SetingForAdmin
+│   ├── worker_window.py        # SetingForWorkers
+│   └── product_dialog.py       # AddProductDialog
+│
+├── widgets/                    # Кастомные виджеты
+│   ├── __init__.py
+│   ├── product_widget.py       # ProductWidget
+│   └── sliding_menu.py         # SlidingMenu
+│
+├── utils/
+│   ├── __init__.py
+│   ├── validators.py           # Проверки логина, пароля, email, телефона
+│   └── exceptions.py           # Собственные исключения
+│
+└── system_file/                # .ui файлы и ресурсы
+    ├── welcome.ui
+    ├── registration.ui
+    ├── main_window.ui
+    ├── oformlenie_zakaza.ui
+    ├── plus_balans.ui
+    ├── for_admin.ui
+    ├── for_workers.ui
+    ├── users.json
+    └── products.json
+```
+
+
+
+
 # Версии:
 ## 30.05.2024 (Дата релиза на GitHub: 22.03.2025)
 Это первая версия проекта, разработанная в соответствии с установленными
