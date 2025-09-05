@@ -20,13 +20,13 @@ class MostWeb:
         self.welcome_window.close()
         print(id, type_avt)
         # self.MainWindow = (self.databasemanager, id, type_avt)
-        self.MainWindow.show()
+        # self.MainWindow.show()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     most_web = MostWeb()
-    sys.exit(app.exec())  # Запуск приложения
+    sys.exit(app.exec())
 
 # welcome_window.name_updated.connect(main_window.upda te_balance_label)
 

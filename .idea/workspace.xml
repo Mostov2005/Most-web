@@ -4,33 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Release v1.0">
-      <change afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/basket.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/password_hasher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/database_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/balance_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/basket_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/product_dialog.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/registration_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/welcome_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/worker_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/validators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/sliding_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Most-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Most-web.iml" afterDir="false" />
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Начало переработки структуры">
+      <change afterPath="$PROJECT_DIR$/ui/info_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system_file/users.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/registration_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/registration_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/welcome_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/welcome_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/validators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +29,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -66,9 +56,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Python.1.executor": "Run",
+    "Python.1.executor": "Debug",
     "Python.2.executor": "Run",
-    "Python.main.executor": "Run",
+    "Python.database_manager.executor": "Run",
+    "Python.main.executor": "Debug",
     "Python.registration_window.executor": "Run",
     "Python.welcome_window.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -82,7 +73,7 @@
       <recent name="C:\Pycharm Project\Most-web" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.registration_window">
+  <component name="RunManager" selected="Python.main">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
@@ -119,6 +110,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="database_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_manager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,7 +211,7 @@
         <item itemvalue="Python.registration_window" />
         <item itemvalue="Python.welcome_window" />
         <item itemvalue="Python.1" />
-        <item itemvalue="Python.2" />
+        <item itemvalue="Python.database_manager" />
         <item itemvalue="Python.2" />
       </list>
     </recent_temporary>
@@ -227,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742669026640</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Начало переработки структуры">
+      <option name="closed" value="true" />
+      <created>1756801683868</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756801683868</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,6 +264,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Release v1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Release v1.0" />
+    <MESSAGE value="Начало переработки структуры" />
+    <option name="LAST_COMMIT_MESSAGE" value="Начало переработки структуры" />
   </component>
 </project>
