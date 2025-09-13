@@ -8,7 +8,7 @@ from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from PyQt6.uic import loadUi
 from core import PasswordHasher
-from database import DataBaseManager
+from database import DataBaseUserManager
 from PyQt6.QtCore import QPropertyAnimation
 
 from ui.registration_window import RegistrationWindow
@@ -18,13 +18,13 @@ from ui.registration_window import RegistrationWindow
 class WelcomeWindow(QMainWindow):
     valid_user_signal = pyqtSignal(int, str)
 
-    def __init__(self, data_base_manager):
+    def __init__(self, database_user_manager):
         super().__init__()
         ui_path = os.path.join(os.path.dirname(__file__), '..', 'system_file', 'welcome.ui')
         ui_path = os.path.abspath(ui_path)
         loadUi(ui_path, self)
 
-        self.database_manager = data_base_manager
+        self.database_user_manager = database_user_manager
         self.registr_btn.clicked.connect(self.switch_on_registr)
         self.avt_btn.clicked.connect(self.authorization)
         self.name_edit.textChanged.connect(self.clear_error_message)
@@ -37,7 +37,7 @@ class WelcomeWindow(QMainWindow):
         name = self.name_edit.text()
         password = self.paroll_edit.text()
 
-        result_user = self.database_manager.check_valid_users(name, password)
+        result_user = self.database_user_manager.check_valid_users(name, password)
         if result_user is None:
             self.error_label.setText("Неверное имя пользователя или пароль!")
         else:
@@ -54,7 +54,7 @@ class WelcomeWindow(QMainWindow):
         self.name_edit.clear()
         self.paroll_edit.clear()
         self.error_label.clear()
-        self.registration_window = RegistrationWindow(self.database_manager)
+        self.registration_window = RegistrationWindow(self.database_user_manager)
         self.registration_window.back_signal.connect(self.show_window)
         # Анимация появления нового окна
         self.fade_in(self.registration_window)
@@ -90,9 +90,9 @@ class WelcomeWindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    databasemanager = DataBaseManager()
+    database_user_manager = DataBaseUserManager()
 
     app = QApplication(sys.argv)
-    welcome_window = WelcomeWindow(databasemanager)
+    welcome_window = WelcomeWindow(database_user_manager)
     welcome_window.show()
     sys.exit(app.exec())  # Запуск приложения

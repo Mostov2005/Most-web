@@ -73,26 +73,26 @@ class AddProductDialog(QDialog):
             self.image_label.setText(os.path.basename(filename))
             self.image_path = filename
 
-    def add_product(self):
-        name = self.name_edit.text()
-        price = self.price_edit.text()
-        image = getattr(self, "image_path", "")
-
-        # Проверяем, чтобы все поля были заполнены
-        if name and price and image:
-            # Копируем изображение в папку с изображениями
-            image_filename = os.path.basename(image)
-            destination_path = os.path.join(
-                "pictures", image_filename)
-            shutil.copyfile(image, destination_path)
-
-            image = destination_path
-
-            product = {"name": name, "price": int(price), "image": image}
-            products.append(product)
-            with open('system_file\\products.json', 'w', encoding='UTF-8') as file:
-                json.dump(products, file, indent=2, ensure_ascii=False)
-
-            self.close()
-        else:
-            self.error_label.setText('Заполните все поля')
+    # def add_product(self):
+    #     name = self.name_edit.text()
+    #     price = self.price_edit.text()
+    #     image = getattr(self, "image_path", "")
+    #
+    #     # Проверяем, чтобы все поля были заполнены
+    #     if name and price and image:
+    #         # Копируем изображение в папку с изображениями
+    #         image_filename = os.path.basename(image)
+    #         destination_path = os.path.join(
+    #             "pictures", image_filename)
+    #         shutil.copyfile(image, destination_path)
+    #
+    #         image = destination_path
+    #
+    #         product = {"name": name, "price": int(price), "image": image}
+    #         products.append(product)
+    #         with open('system_file\\products.json', 'w', encoding='UTF-8') as file:
+    #             json.dump(products, file, indent=2, ensure_ascii=False)
+    #
+    #         self.close()
+    #     else:
+    #         self.error_label.setText('Заполните все поля')

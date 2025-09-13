@@ -2,15 +2,15 @@ import sys
 from PyQt6.QtWidgets import QApplication
 
 from core import password_hasher
-from database import DataBaseManager
+from database import DataBaseUserManager
 from ui import WelcomeWindow, MainWindow
 
 
 class MostWeb:
     def __init__(self):
-        self.databasemanager = DataBaseManager()
+        self.database_user_manager = DataBaseUserManager()
 
-        self.welcome_window = WelcomeWindow(self.databasemanager)
+        self.welcome_window = WelcomeWindow(self.database_user_manager)
         self.welcome_window.valid_user_signal.connect(self.handle_window_signal)
         self.welcome_window.show()
 

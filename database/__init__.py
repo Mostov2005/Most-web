@@ -1,1 +1,2 @@
-from .database_manager import DataBaseManager
+from .database_user_manager import DataBaseUserManager
+from .database_product_manager import DataBaseProductManager

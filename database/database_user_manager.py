@@ -5,7 +5,7 @@ from utils import InvalidCSVError, InvalidAddUserError
 from core import PasswordHasher
 
 
-class DataBaseManager:
+class DataBaseUserManager:
     def __init__(self):
         self.users = pd.DataFrame()
         self.ph = PasswordHasher
@@ -16,7 +16,7 @@ class DataBaseManager:
 
     def __read_users(self):
         try:
-            self.users = pd.read_csv(self.file_path, encoding='UTF-8')
+            self.users = pd.read_csv(self.file_path, encoding='UTF-8', index_col="id")
         except Exception as e:
             print(InvalidCSVError(str(e)))
 
@@ -75,9 +75,13 @@ class DataBaseManager:
         except Exception as e:
             print(InvalidAddUserError(str(e)))
 
+    def get_user_by_id(self, user_id):
+        return self.users.loc[user_id]
+
 
 if __name__ == "__main__":
-    database_manager = DataBaseManager()
+    database_manager = DataBaseUserManager()
     print(database_manager.check_user_availability('32133'))
+    print(database_manager.get_user_by_id(0))
 
     # database_manager.add_new_user("1", "1", "1", "1")

@@ -8,7 +8,7 @@ from PyQt6.uic import loadUi
 from PyQt6.QtCore import pyqtSignal
 
 from core import PasswordHasher
-from database import DataBaseManager
+from database import DataBaseUserManager
 from utils.validators import validate_login, validate_phone, validate_password
 from ui.info_window import InfoWindow
 
@@ -17,13 +17,13 @@ from ui.info_window import InfoWindow
 class RegistrationWindow(QMainWindow):
     back_signal = pyqtSignal()
 
-    def __init__(self, database_manager):
+    def __init__(self, database_user_manager):
         super().__init__()
         ui_path = os.path.join(os.path.dirname(__file__), '..', 'system_file', 'registration.ui')
         ui_path = os.path.abspath(ui_path)
         loadUi(ui_path, self)
 
-        self.database_manager = database_manager
+        self.database_user_manager = database_user_manager
 
         self.back_btn.clicked.connect(self.switch_on_welcome)
         self.registr_btn.clicked.connect(self.validate_registration)
@@ -72,20 +72,20 @@ class RegistrationWindow(QMainWindow):
             self.error_registration_label.setText("Заполните все поля!")
             return
 
-        if self.database_manager.check_user_availability(login):
+        if self.database_user_manager.check_user_availability(login):
             self.error_login_label.setText('Пользователь с таким логином уже существует!')
             return
 
-        if self.database_manager.check_email_availability(email):
+        if self.database_user_manager.check_email_availability(email):
             self.error_email_label.setText('Пользователь с таким email уже существует')
             return
 
-        if self.database_manager.check_phone_availability(phone):
+        if self.database_user_manager.check_phone_availability(phone):
             self.error_phone_label.setText('Пользователь с таким номером телефона уже существует')
             return
 
         try:
-            self.database_manager.add_new_user(login, email, phone, password)
+            self.database_user_manager.add_new_user(login, email, phone, password)
             self.info_window = InfoWindow("Успех", "Регистрация прошла успешно!")
             self.info_window.show()
         except Exception as e:
@@ -150,7 +150,7 @@ class RegistrationWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    database_manager = DataBaseManager()
-    registration_window = RegistrationWindow(database_manager)
+    database_user_manager = DataBaseUserManager()
+    registration_window = RegistrationWindow(database_user_manager)
     registration_window.show()
     sys.exit(app.exec())
