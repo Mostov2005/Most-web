@@ -16,7 +16,7 @@ class DataBaseUserManager:
 
     def __read_users(self):
         try:
-            self.users = pd.read_csv(self.file_path, encoding='UTF-8', index_col="id")
+            self.users = pd.read_csv(self.file_path, encoding='UTF-8', index_col="id", dtype={"phone": str})
         except Exception as e:
             print(InvalidCSVError(str(e)))
 
@@ -78,10 +78,45 @@ class DataBaseUserManager:
     def get_user_by_id(self, user_id):
         return self.users.loc[user_id]
 
+    def get_balance_by_id(self, user_id):
+        row = self.users.loc[user_id]
+        return row['balance']
+
+    def get_name_by_id(self, user_id):
+        row = self.users.loc[user_id]
+        return row['name']
+
+    def update_user(self, user_id: int, username: str, password_hash: str,
+                    email: str, number: str, role: str, balance: float) -> None:
+        """Обновляет данные одного пользователя в DataFrame."""
+        if user_id not in self.users.index:
+            raise ValueError(f"Пользователь с id={user_id} не найден")
+
+        self.users.loc[user_id, "name"] = username
+        self.users.loc[user_id, "hash"] = password_hash
+        self.users.loc[user_id, "email"] = email
+        self.users.loc[user_id, "phone"] = str(number)
+        self.users.loc[user_id, "role"] = role
+        self.users.loc[user_id, "balance"] = balance
+
+    def save(self) -> None:
+        """Сохраняет все изменения обратно в CSV."""
+        self.users.to_csv(self.file_path, index=True)
+
+    def delete_user(self, user_id: int) -> None:
+        """
+        Удаляет пользователя по его ID из DataFrame и сохраняет изменения в CSV.
+        """
+        if user_id not in self.users.index:
+            raise ValueError(f"Пользователь с id={user_id} не найден")
+
+        # Удаляем пользователя
+        self.users = self.users.drop(user_id)
+
 
 if __name__ == "__main__":
     database_manager = DataBaseUserManager()
     print(database_manager.check_user_availability('32133'))
-    print(database_manager.get_user_by_id(0))
+    print(database_manager.get_balance_by_id(100))
 
     # database_manager.add_new_user("1", "1", "1", "1")

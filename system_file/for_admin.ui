@@ -58,6 +58,16 @@
     </property>
     <column>
      <property name="text">
+      <string>ID</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Имя пользователя</string>
      </property>
      <property name="font">
@@ -756,8 +766,18 @@
      <enum>QAbstractItemView::NoSelection</enum>
     </property>
     <attribute name="verticalHeaderVisible">
-     <bool>false</bool>
+     <bool>true</bool>
     </attribute>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+    </column>
     <column>
      <property name="text">
       <string>Имя пользователя</string>

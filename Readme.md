@@ -57,7 +57,7 @@ internet_shop
 │   ├── main_window.py          # MainWindow (главное окно)
 │   ├── basket_window.py        # Oformlenie_Zakaza
 │   ├── balance_window.py       # Poplnenie_balansa
-│   ├── admin_window.py         # SetingForAdmin
+│   ├── admin_window.py         # AdminWindow
 │   ├── worker_window.py        # SetingForWorkers
 │   └── product_dialog.py       # AddProductDialog
 │

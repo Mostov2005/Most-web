@@ -4,26 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Рабочие окна авторизации и регистрации">
-      <change afterPath="$PROJECT_DIR$/core/recommender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/database_product_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/product_table.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/product_widget.py" afterDir="false" />
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Заполнение главного окна товарами + менеджер по продуктам + скользящее меню">
+      <change afterPath="$PROJECT_DIR$/ui/unsaved_changes_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_user_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system_file/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/main_window.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database_user_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_user_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/for_admin.ui" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/for_admin.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system_file/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/admin_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/product_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/product_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/registration_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/registration_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/welcome_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/welcome_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/sliding_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/sliding_menu.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +57,7 @@
   "keyToString": {
     "Python.1.executor": "Debug",
     "Python.2.executor": "Run",
+    "Python.admin_window.executor": "Run",
     "Python.database_manager.executor": "Run",
     "Python.database_product_manager.executor": "Run",
     "Python.database_user_manager.executor": "Run",
@@ -91,6 +82,28 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main_window">
+    <configuration name="admin_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/admin_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="database_product_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
@@ -105,6 +118,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_product_manager.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="database_user_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_user_manager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -179,57 +214,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="product_widget" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Most-web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/product_widget.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="recommender" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Most-web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/core" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/core/recommender.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_window" />
+        <item itemvalue="Python.admin_window" />
+        <item itemvalue="Python.database_user_manager" />
         <item itemvalue="Python.product_table" />
         <item itemvalue="Python.database_product_manager" />
-        <item itemvalue="Python.product_widget" />
-        <item itemvalue="Python.recommender" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757090732385</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Заполнение главного окна товарами + менеджер по продуктам + скользящее меню">
+      <option name="closed" value="true" />
+      <created>1757789054085</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1757789054085</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,6 +317,7 @@
     <MESSAGE value="Новые валидаторы и исключения" />
     <MESSAGE value="Доп функции менеджера" />
     <MESSAGE value="Рабочие окна авторизации и регистрации" />
-    <option name="LAST_COMMIT_MESSAGE" value="Рабочие окна авторизации и регистрации" />
+    <MESSAGE value="Заполнение главного окна товарами + менеджер по продуктам + скользящее меню" />
+    <option name="LAST_COMMIT_MESSAGE" value="Заполнение главного окна товарами + менеджер по продуктам + скользящее меню" />
   </component>
 </project>
