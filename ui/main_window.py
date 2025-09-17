@@ -12,6 +12,7 @@ from widgets.sliding_menu import SlidingMenu
 from widgets.product_table import ProductTable
 from core.recommender import Recommender
 from ui.admin_window import AdminWindow
+from ui.balance_window import AddBalance
 
 
 # Главное окно
@@ -36,8 +37,8 @@ class MainWindow(QMainWindow):
 
         self.button_admin.clicked.connect(self.switch_of_for_admin)
         self.toggle_btn.clicked.connect(self.toggle_menu)
+        self.popolnenie_balans_btn.clicked.connect(self.switch_to_balans_window)
         # self.basket_btn.clicked.connect(self.switch_to_basket)
-        # self.popolnenie_balans_btn.clicked.connect(self.switch_to_plus_balance)
 
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
@@ -63,10 +64,6 @@ class MainWindow(QMainWindow):
     def add_product_in_basket(self, product_id):
         print(product_id)
 
-    def update_balance_button(self):
-        balance_user = self.database_user_manager.get_balance_by_id(self.user_id)
-        self.popolnenie_balans_btn.setText(f'+ {balance_user}₽')
-
     def update_name_label(self):
         name = self.database_user_manager.get_name_by_id(self.user_id)
         self.name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -81,6 +78,18 @@ class MainWindow(QMainWindow):
         self.for_admin_window.show()
         self.hide()
 
+    def switch_to_balans_window(self):
+        self.plus_balans = AddBalance(self.database_user_manager, self.user_id)
+        self.plus_balans.back_signal.connect(self.show)
+        self.plus_balans.back_signal.connect(self.update_balance_button)
+        self.plus_balans.show()
+
+        self.hide()
+
+    def update_balance_button(self):
+        balance_user = self.database_user_manager.get_balance_by_id(self.user_id)
+        self.popolnenie_balans_btn.setText(f'+ {balance_user}₽')
+
     #
     # def switch_to_worker_menu(self):
     #     self.for_workers_window = SetingForWorkers()
@@ -93,14 +102,6 @@ class MainWindow(QMainWindow):
     #     self.count_tovar_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
     #     self.popolnenie_balans_btn.setText(f'+ {users[self.name][5]}₽')
     #
-    # def update_balance_label(self, name):
-    #     self.name = name
-    #     self.name_label.setText(self.name)
-    #     self.name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-    #     self.popolnenie_balans_btn.setText(f'+ {users[self.name][5]}₽')
-    #     self.status = users[self.name][4]
-    #     self.menu.hide_btn(self.status)
-    #     self.update_basket_label()
 
     # def switch_to_basket(self):
     #     self.basket_window = Oformalenie_Zakaza(self.name)
@@ -108,11 +109,6 @@ class MainWindow(QMainWindow):
     #     self.close()
     #     self.basket_window.show()
     #
-    # def switch_to_plus_balance(self):
-    #     self.plus_balans = Poplnenie_balansa(self.name)
-    #     self.plus_balans.balance_updated.connect(self.update_balance_label)
-    #     self.close()
-    #     self.plus_balans.show()
 
 
 if __name__ == "__main__":

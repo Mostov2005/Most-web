@@ -1,2 +1,3 @@
 from .database_user_manager import DataBaseUserManager
 from .database_product_manager import DataBaseProductManager
+from .get_abs_path import get_abs_path

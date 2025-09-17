@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication
 from core import password_hasher
 from database import DataBaseUserManager
 from ui import WelcomeWindow, MainWindow
-
+from database import get_abs_path
 
 class MostWeb:
     def __init__(self):

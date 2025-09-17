@@ -1,41 +1,45 @@
 import json
 import sys
-import re
 import os
-import shutil
 
-from PyQt6.QtCore import pyqtSignal, QPropertyAnimation, QRect, QEasingCurve, Qt, QRegularExpression
-from PyQt6.QtGui import QPixmap, QIntValidator, QFont, QRegularExpressionValidator
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtGui import QPixmap, QIntValidator
+from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.uic import loadUi
-from PyQt6.QtWidgets import QTableWidgetItem, QDialog, QRadioButton, QButtonGroup, QComboBox, QFileDialog
-from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QLabel, QVBoxLayout, QMainWindow, QMessageBox, QLineEdit
-
-from core import PasswordHasher
+from database import DataBaseUserManager
+from database import get_abs_path
 
 
 # Подраздел главного окна(пополнение баланса)
-class Poplnenie_balansa(QMainWindow):
-    balance_updated = pyqtSignal(str)
+class AddBalance(QMainWindow):
+    back_signal = pyqtSignal()
 
-    def __init__(self, name):
+    def __init__(self, database_user_manager, user_id):
         super().__init__()
-        loadUi("system_file\\plus_balans.ui", self)
+        ui_path = get_abs_path('system_file', 'plus_balans.ui')
+        loadUi(ui_path, self)
+
         self.move(0, 0)
 
-        self.poplnenie_btn.clicked.connect(self.add_summ)
-        self.back_menu_btn.clicked.connect(self.swith_of_main)
+        self.database_user_manager = database_user_manager
+        self.user_id = user_id
+        self.BALANCE_CHANGE = False
 
-        self.name_polzovatel = name
-        self.tec_balans = users[self.name_polzovatel][5]
-        self.label_tec_balans.setText(f'Текущий баланс: {self.tec_balans}')
+        self.poplnenie_btn.clicked.connect(self.add_summ)
+        self.back_menu_btn.clicked.connect(self.switch_of_main)
+
+        self.tec_balance = self.database_user_manager.get_balance_by_id(self.user_id)
+
+        self.label_tec_balans.setText(f'Текущий баланс: {self.tec_balance}')
         self.label_tec_balans.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.line_add_summ.setValidator(self.positive_int_validator())
         self.line_add_summ.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Загружаем изображение
-        pixmap = QPixmap("system_file\\my_QR.png")
+        pixmap = QPixmap(get_abs_path('system_file', 'my_QR.png'))
         pixmap = pixmap.scaled(375, 375, aspectRatioMode=Qt.AspectRatioMode.IgnoreAspectRatio)
+
         # Устанавливаем изображение на QLabel
         self.label_image.setPixmap(pixmap)
         self.label_image.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -53,17 +57,21 @@ class Poplnenie_balansa(QMainWindow):
         if len(self.line_add_summ.text()) > 0:
             plus_summ = int(self.line_add_summ.text())
             self.line_add_summ.clear()
-            self.tec_balans += plus_summ
+            self.tec_balance += plus_summ
 
-            self.label_tec_balans.setText(f'Текущий баланс: {self.tec_balans}')
+            self.label_tec_balans.setText(f'Текущий баланс: {self.tec_balance}')
 
-            users[self.name_polzovatel][5] = self.tec_balans
-            with open('system_file\\users.csv', 'w') as file:
-                json.dump(users, file, ensure_ascii=False, indent=2)
+            self.database_user_manager.set_balance_by_id(self.user_id, self.tec_balance)
 
-            # Emit signal
-            self.balance_updated.emit(self.name_polzovatel)
+    def switch_of_main(self):
+        self.back_signal.emit()
+        self.close()
 
-    def swith_of_main(self):
-        self.hide()
-        main_window.show()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    database_user_manager = DataBaseUserManager()
+
+    add_balance_window = AddBalance(database_user_manager, 100)
+    add_balance_window.show()
+    sys.exit(app.exec())

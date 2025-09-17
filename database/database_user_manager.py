@@ -71,7 +71,7 @@ class DataBaseUserManager:
                 'balance': 0
             }
 
-            self.users.to_csv(self.file_path, index=False, encoding='UTF-8')
+            self.save()
         except Exception as e:
             print(InvalidAddUserError(str(e)))
 
@@ -87,7 +87,7 @@ class DataBaseUserManager:
         return row['name']
 
     def update_user(self, user_id: int, username: str, password_hash: str,
-                    email: str, number: str, role: str, balance: float) -> None:
+                    email: str, number: str, role: str, balance: int) -> None:
         """Обновляет данные одного пользователя в DataFrame."""
         if user_id not in self.users.index:
             raise ValueError(f"Пользователь с id={user_id} не найден")
@@ -101,7 +101,7 @@ class DataBaseUserManager:
 
     def save(self) -> None:
         """Сохраняет все изменения обратно в CSV."""
-        self.users.to_csv(self.file_path, index=True)
+        self.users.to_csv(self.file_path, index=True, encoding='UTF-8')
 
     def delete_user(self, user_id: int) -> None:
         """
@@ -112,6 +112,10 @@ class DataBaseUserManager:
 
         # Удаляем пользователя
         self.users = self.users.drop(user_id)
+
+    def set_balance_by_id(self, user_id, new_balance):
+        self.users.loc[user_id, "balance"] = new_balance
+        self.save()
 
 
 if __name__ == "__main__":

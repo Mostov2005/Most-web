@@ -150,7 +150,7 @@ class AdminWindow(QMainWindow):
 
             balance_line_edit = self.table.cellWidget(row, 6)
             balance_text = balance_line_edit.text() if balance_line_edit else "0"
-            balance = float(balance_text) if balance_text else 0.0
+            balance = int(balance_text) if balance_text else 0
 
             # передаём обновлённые данные менеджеру
             self.database_user_manager.update_user(
