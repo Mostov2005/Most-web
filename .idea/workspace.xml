@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Окно управление пользователями(Для администраторов)">
-      <change afterPath="$PROJECT_DIR$/database/get_abs_path.py" afterDir="false" />
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Окно добавления баланса">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database_user_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_user_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system_file/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/admin_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/balance_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/balance_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758027764328</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Окно добавления баланса">
+      <option name="closed" value="true" />
+      <created>1758110991901</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1758110991901</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,6 +329,7 @@
     <MESSAGE value="Рабочие окна авторизации и регистрации" />
     <MESSAGE value="Заполнение главного окна товарами + менеджер по продуктам + скользящее меню" />
     <MESSAGE value="Окно управление пользователями(Для администраторов)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Окно управление пользователями(Для администраторов)" />
+    <MESSAGE value="Окно добавления баланса" />
+    <option name="LAST_COMMIT_MESSAGE" value="Окно добавления баланса" />
   </component>
 </project>
