@@ -1,4 +1,6 @@
-from core import PasswordHasher
+d = {}
 
-
-print(PasswordHasher.hash_password("1"))
+if not d:
+    print("Словарь пуст")
+else:
+    print("Словарь не пуст")

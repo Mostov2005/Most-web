@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import csv
-from utils import InvalidCSVError, InvalidAddUserError
+from utils import InvalidCsvUserError, InvalidAddUserError
 from core import PasswordHasher
 
 
@@ -19,7 +19,7 @@ class DataBaseUserManager:
         try:
             self.users = pd.read_csv(self.file_path, encoding='UTF-8', index_col="id", dtype={"phone": str})
         except Exception as e:
-            print(InvalidCSVError(str(e)))
+            print(InvalidCsvUserError(str(e)))
 
     def __get_max_id(self):
         try:

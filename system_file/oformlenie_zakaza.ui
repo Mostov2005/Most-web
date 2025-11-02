@@ -82,7 +82,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Колличество</string>
+      <string>Количество</string>
      </property>
     </column>
     <column>

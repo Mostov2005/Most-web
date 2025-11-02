@@ -1,4 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout
+import sys
+
+from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QApplication
 
 
 class InfoWindow(QWidget):
@@ -17,3 +19,10 @@ class InfoWindow(QWidget):
         layout.addWidget(btn)
 
         self.setLayout(layout)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    info_window = InfoWindow("Успех", "Регистрация прошла успешно!")
+    info_window.show()
+    sys.exit(app.exec())

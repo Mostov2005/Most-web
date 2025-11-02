@@ -1,4 +1,4 @@
-class InvalidCSVError(Exception):
+class InvalidCsvUserError(Exception):
     def __init__(self, message=""):
         self.start_message = "Не удалось считать пользователей: "
         self.message = self.start_message + message
@@ -19,8 +19,15 @@ class InvalidAddProductError(Exception):
         super().__init__(self.message)
 
 
-class InvalidJsonError(Exception):
+class InvalidCsvProductError(Exception):
     def __init__(self, message=""):
         self.start_message = "Не удалось считать товары: "
+        self.message = self.start_message + message
+        super().__init__(self.message)
+
+
+class InvalidCsvOrdersError(Exception):
+    def __init__(self, message=""):
+        self.start_message = "Не удалось считать историю покупок: "
         self.message = self.start_message + message
         super().__init__(self.message)

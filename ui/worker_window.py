@@ -19,7 +19,7 @@ class WorkerWindow(QMainWindow):
         ui_path = get_abs_path("system_file", 'for_workers.ui')
         loadUi(ui_path, self)
         self.move(0, 0)
-
+        # print('dsds')
         self.database_product_manager = database_product_manager
 
         # Подключаем сигнал к слоту для открытия окна добавления товара
@@ -27,6 +27,8 @@ class WorkerWindow(QMainWindow):
         self.add_product_btn.clicked.connect(self.open_add_product_dialog)
         self.back_menu_btn.clicked.connect(self.switch_of_main)
 
+        self.table.setColumnCount(4)
+        self.table.setColumnHidden(3, True)
         # Размеры таблицы
         self.table.setColumnWidth(0, 250)
         self.table.setColumnWidth(1, 150)
@@ -47,13 +49,17 @@ class WorkerWindow(QMainWindow):
             self.table.setItem(table_row, 0, QTableWidgetItem(str(row['name'])))
             self.table.setItem(table_row, 1, QTableWidgetItem(str(row['price'])))
             self.table.setItem(table_row, 2, QTableWidgetItem(str(row['image'])))
+            self.table.setItem(table_row, 3, QTableWidgetItem(str(row.name)))
+            self.table.setColumnHidden(3, True)
 
     def delete_product(self):
         selected_items = self.table.selectedItems()
         if not selected_items:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите продукт для удаления.")
             return
-        name_product = selected_items[0].text()
+        row_index = selected_items[0].row()
+        id_item = self.table.item(row_index, 3)
+        id_delete_product = int(id_item.text())
 
         reply = QMessageBox.question(
             self,
@@ -66,7 +72,6 @@ class WorkerWindow(QMainWindow):
             selected_row = selected_items[0].row()
             self.table.removeRow(selected_row)
 
-            id_delete_product = self.database_product_manager.get_id_product_by_name(name_product)
             self.database_product_manager.delete_product(id_delete_product)
 
     def open_add_product_dialog(self):

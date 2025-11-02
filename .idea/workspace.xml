@@ -4,25 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Продукты в csv">
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Рабочее окно работников (worker_window)">
+      <change afterPath="$PROJECT_DIR$/database/database_orders_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system_file/orders.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/basket.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/basket.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database_product_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_product_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database_user_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_user_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/get_abs_path.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/get_abs_path.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/oformlenie_zakaza.ui" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/oformlenie_zakaza.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system_file/products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/products.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system_file/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/admin_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/basket_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/basket_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/info_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/info_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/product_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/product_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/unsaved_changes_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/unsaved_changes_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/worker_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/worker_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/product_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/product_table.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,12 +68,16 @@
     "Python.2.executor": "Run",
     "Python.admin_window.executor": "Run",
     "Python.balance_window.executor": "Run",
+    "Python.basket_window.executor": "Run",
     "Python.database_manager.executor": "Run",
+    "Python.database_orders_manager.executor": "Run",
     "Python.database_product_manager.executor": "Run",
     "Python.database_user_manager.executor": "Run",
     "Python.get_abs_path.executor": "Run",
+    "Python.info_window.executor": "Run",
     "Python.main.executor": "Run",
     "Python.main_window.executor": "Run",
+    "Python.mouse and keyboard.executor": "Run",
     "Python.product_dialog (1).executor": "Run",
     "Python.product_dialog.executor": "Run",
     "Python.product_table.executor": "Run",
@@ -98,8 +102,30 @@
       <recent name="C:\Pycharm Project\Most-web" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_window">
-    <configuration name="admin_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.mouse and keyboard">
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="basket_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,7 +138,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/admin_window.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/basket_window.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -121,7 +147,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="database_user_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="database_orders_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -134,29 +160,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_user_manager.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="get_abs_path" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Most-web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/get_abs_path.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_orders_manager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -209,7 +213,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="worker_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="mouse and keyboard" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -218,11 +222,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Pycharrm Projects/Charaga/Кликер" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/worker_window.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Pycharrm Projects/Charaga/Кликер/mouse and keyboard.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -233,11 +237,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mouse and keyboard" />
         <item itemvalue="Python.main_window" />
-        <item itemvalue="Python.admin_window" />
-        <item itemvalue="Python.database_user_manager" />
-        <item itemvalue="Python.worker_window" />
-        <item itemvalue="Python.get_abs_path" />
+        <item itemvalue="Python.basket_window" />
+        <item itemvalue="Python.database_orders_manager" />
+        <item itemvalue="Python.1" />
       </list>
     </recent_temporary>
   </component>
@@ -337,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758133976066</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Рабочее окно работников (worker_window)">
+      <option name="closed" value="true" />
+      <created>1762083341830</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762083341830</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,6 +374,7 @@
     <MESSAGE value="Окно управление пользователями(Для администраторов)" />
     <MESSAGE value="Окно добавления баланса" />
     <MESSAGE value="Продукты в csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="Продукты в csv" />
+    <MESSAGE value="Рабочее окно работников (worker_window)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рабочее окно работников (worker_window)" />
   </component>
 </project>

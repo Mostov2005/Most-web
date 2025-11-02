@@ -19,10 +19,8 @@ class MostWeb:
 
     def handle_window_signal(self, id, type_avt):
         # Обработка сигнала, который пришел из WelcomeWindow
-        print('main')
         self.welcome_window.close()
-        print(id, type_avt)
-        main_window = MainWindow(self.database_user_manager, self.database_product_manager, 100)
+        main_window = MainWindow(self.database_user_manager, self.database_product_manager, 100, type_avt)
         main_window.show()
 
 

@@ -14,11 +14,12 @@ from core.recommender import Recommender
 from ui.admin_window import AdminWindow
 from ui.balance_window import AddBalance
 from ui.worker_window import WorkerWindow
+from ui.basket_window import BasketWindow
 
 
 # Главное окно
 class MainWindow(QMainWindow):
-    def __init__(self, database_user_manager, database_product_manager, user_id):
+    def __init__(self, database_user_manager, database_product_manager, user_id, type_avt):
         super().__init__()
         ui_path = os.path.join(os.path.dirname(__file__), '..', 'system_file', 'main_window.ui')
         ui_path = os.path.abspath(ui_path)
@@ -26,6 +27,8 @@ class MainWindow(QMainWindow):
         self.move(0, 0)
         # self.setWindowState(Qt.WindowFullScreen)
         self.user_id = user_id
+        self.basket = dict()
+        self.type_avt = type_avt
 
         self.database_user_manager = database_user_manager
         self.database_product_manager = database_product_manager
@@ -41,16 +44,22 @@ class MainWindow(QMainWindow):
 
         self.toggle_btn.clicked.connect(self.toggle_menu)
         self.popolnenie_balans_btn.clicked.connect(self.switch_to_balans_window)
-        # self.basket_btn.clicked.connect(self.switch_to_basket)
+        self.basket_btn.clicked.connect(self.switch_to_basket)
 
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
 
+        self.show_button()
         self.update_table()
         self.update_balance_button()
         self.update_name_label()
 
-        # self.update_balance_label()
+    def show_button(self):
+        if self.type_avt == 'Buyer':
+            self.button_admin.hide()
+            self.button_worker.hide()
+        elif self.type_avt == 'Worker':
+            self.button_admin.hide()
 
     def toggle_menu(self):
         if self.menu.geometry().x() < 0:
@@ -65,7 +74,15 @@ class MainWindow(QMainWindow):
         self.product_table.update_table(products)
 
     def add_product_in_basket(self, product_id):
-        print(product_id)
+        self.basket[product_id] = self.basket.get(product_id, 0) + 1
+        self.update_count_product()
+
+    def update_count_product(self):
+        s = '🛒 Корзина'
+        count_product = 0
+        for quantity in self.basket.values():
+            count_product += quantity
+        self.basket_btn.setText(f'🛒 Корзина: {count_product}')
 
     def update_name_label(self):
         name = self.database_user_manager.get_name_by_id(self.user_id)
@@ -99,18 +116,19 @@ class MainWindow(QMainWindow):
         balance_user = self.database_user_manager.get_balance_by_id(self.user_id)
         self.popolnenie_balans_btn.setText(f'+ {balance_user}₽')
 
-    # def update_basket_label(self):
-    #     self.count_tovar_label.setText(f'{len(basket)}: {summ_basket} ₽')
-    #     self.count_tovar_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-    #     self.popolnenie_balans_btn.setText(f'+ {users[self.name][5]}₽')
-    #
+    def close_basket_window(self, basket):
+        self.show()
+        self.update_balance_button()
+        # self.popolnenie_balans_btn.setText(f'+ {users[self.name][5]}₽')
 
-    # def switch_to_basket(self):
-    #     self.basket_window = Oformalenie_Zakaza(self.name)
-    #     self.basket_window.basket_updated.connect(self.update_basket_label)
-    #     self.close()
-    #     self.basket_window.show()
-    #
+    def switch_to_basket(self):
+        self.basket_window = BasketWindow(self.user_id,
+                                          self.database_user_manager,
+                                          self.database_product_manager,
+                                          self.basket)
+        self.basket_window.basket_updated.connect(self.close_basket_window)
+        self.hide()
+        self.basket_window.show()
 
 
 if __name__ == "__main__":
@@ -118,7 +136,7 @@ if __name__ == "__main__":
     database_user_manager = DataBaseUserManager()
     database_product_manager = DataBaseProductManager()
 
-    main_window = MainWindow(database_user_manager, database_product_manager, 100)
+    main_window = MainWindow(database_user_manager, database_product_manager, 100, 'Admin')
     main_window.show()
     sys.exit(app.exec())
 

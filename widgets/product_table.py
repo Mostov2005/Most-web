@@ -60,7 +60,7 @@ class ProductTable(QObject):
         self.table_widget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
     def add_product_in_basket(self, product_id):
-        print(product_id)
+        # print(product_id)
         self.add_product_in_basket_signal.emit(product_id)
 
 

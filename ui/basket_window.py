@@ -1,236 +1,252 @@
-import json
 import sys
-import re
-import os
-import shutil
 
-from PyQt6.QtCore import pyqtSignal, QPropertyAnimation, QRect, QEasingCurve, Qt, QRegularExpression
-from PyQt6.QtGui import QPixmap, QIntValidator, QFont, QRegularExpressionValidator
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtWidgets import QMainWindow, QApplication, QLabel, QTableWidgetItem, QMessageBox, QDialog, QVBoxLayout, \
+    QPushButton, QLineEdit
 from PyQt6.uic import loadUi
-from PyQt6.QtWidgets import QTableWidgetItem, QDialog, QRadioButton, QButtonGroup, QComboBox, QFileDialog
-from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QLabel, QVBoxLayout, QMainWindow, QMessageBox, QLineEdit
 
-from core import PasswordHasher
+from database import DataBaseProductManager
+from database import DataBaseUserManager
+from database import DataBaseOrdersManager
+from database import get_abs_path
+from ui.balance_window import AddBalance
 
 
-# Подраздел главного окна(Корзина)
-class Oformalenie_Zakaza(QMainWindow):
-    basket_updated = pyqtSignal(str)  # Определяем кастомный сигнал
+# Подраздел главного окна (Корзина)
+class BasketWindow(QMainWindow):
+    basket_updated = pyqtSignal(dict)
 
-    def __init__(self, name):
+    def __init__(self, user_id, database_user_manager, database_product_manager, basket):
         super().__init__()
-        loadUi("system_file\\oformlenie_zakaza.ui", self)
-        self.name = name
+        ui_path = get_abs_path("system_file", 'oformlenie_zakaza.ui')
+        loadUi(ui_path, self)
+
         self.move(0, 0)
 
-        self.back_menu_btn.clicked.connect(self.swith_of_main)
-        self.oformlenie_zakaza_btn.clicked.connect(self.oformlenie_zakaza)
-
-        self.balans = str(users[self.name][5])
-
-        self.name_label.setText(self.name)
-        self.name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.balans_label.setText(f'Баланс: {self.balans}₽')
-        self.balans_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.database_user_manager = database_user_manager
+        self.database_product_manager = database_product_manager
+        self.database_orders_manager = DataBaseOrdersManager()
+        self.basket: dict[int, int] = basket
+        self.user_id = user_id
+        self.balans = 0
+        self.name = ''
+        self.summ_basket = 0
 
         self.font = QFont()
         self.font.setPointSize(16)
 
-        # Подключаем сигнал к слоту для удаления товара
+        self.back_menu_btn.clicked.connect(self.switch_of_main)
+        self.oformlenie_zakaza_btn.clicked.connect(self.oformlenie_zakaza)
+
         self.delete_btn.clicked.connect(self.delete_product)
 
+        self.table.setColumnCount(5)
+        self.table.setColumnHidden(4, True)
         # Размеры таблицы
         self.table.setColumnWidth(0, 72)
         self.table.setColumnWidth(1, 573)
         self.table.setColumnWidth(2, 100)
         self.table.setColumnWidth(3, 200)
 
+        self.update_label()
+
+    def update_label(self):
+        self.balans = self.database_user_manager.get_balance_by_id(user_id=self.user_id)
+        self.name = self.database_user_manager.get_name_by_id(user_id=self.user_id)
+
+        self.balans_label.setText(f'Баланс: {str(self.balans)}₽')
+        self.balans_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.name_label.setText(self.name)
+        self.name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
         self.populate_table()
 
     def populate_table(self):
-        # Создаем словарь, где ключами будут названия товаров, а значениями - их индексы в списке products
-        product_index = {product['name']: index for index, product in enumerate(products)}
-        # Создаем словарь корзины, используя словарь product_index для быстрого поиска индексов товаров
-        basket_dict = {item: product_index[item] for item in basket if item in product_index}
+        def create_item(text):
+            item = QTableWidgetItem(text)
+            item.setFont(self.font)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            return item
 
+        self.summ_basket = 0
         # Очищаем таблицу
         self.table.setRowCount(0)
 
-        for row, item in enumerate(sorted(set(basket))):
-            self.table.insertRow(row)
-            self.table.setRowHeight(row, 120)
+        for row_index, product_index in enumerate(self.basket):
+            product = self.database_product_manager.get_info_product_by_id(product_index)
 
-            pixmap = QPixmap(products[basket_dict[item]]['image'])
+            name_product = product.get('name', '')
+            price_product = product.get('price', 0)
+            image_product = product.get('image', '')
+
+            if name_product == '' or image_product == '' or price_product == 0:
+                continue
+
+            self.table.insertRow(row_index)
+            self.table.setRowHeight(row_index, 120)
+
+            # Работа с изображением
+            pixmap = QPixmap(get_abs_path(image_product))
             pixmap = pixmap.scaled(72, 120, aspectRatioMode=Qt.AspectRatioMode.IgnoreAspectRatio)
-
             image_label = QLabel()
             image_label.setPixmap(pixmap)
-            self.table.setCellWidget(row, 0, image_label)
+            self.table.setCellWidget(row_index, 0, image_label)
 
-            name_item = QTableWidgetItem(item)
-            name_item.setFont(self.font)
-            name_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.table.setItem(row, 1, name_item)
+            self.table.setItem(row_index, 1, create_item(name_product))
+            self.table.setItem(row_index, 2, create_item(str(self.basket[product_index])))
+            self.table.setItem(row_index, 3, create_item(str(price_product) + '₽'))
+            self.table.setItem(row_index, 4, QTableWidgetItem(str(product_index)))
+            self.table.setColumnHidden(4, True)
 
-            count_item = QTableWidgetItem(str(basket.count(item)))
-            count_item.setFont(self.font)
-            count_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.table.setItem(row, 2, count_item)
+            self.summ_basket += price_product * self.basket[product_index]
 
-            price_item = QTableWidgetItem(str(products[basket_dict[item]]['price']) + '₽')
-            price_item.setFont(self.font)
-            price_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.table.setItem(row, 3, price_item)
-
-        self.itog_label.setText(f'Итого: {str(summ_basket)}₽')
+        self.itog_label.setText(f'Итого: {str(self.summ_basket)}₽')
         self.itog_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def delete_product(self):
-        global basket
-        global summ_basket
         selected_items = self.table.selectedItems()
-        if selected_items:
-            # Получаем имя товара из второй колонки (индекс 1)
-            item_name = self.table.item(selected_items[0].row(), 1).text()
-            price_item = self.table.item(selected_items[0].row(), 3).text()
-            summ_basket -= int(price_item[:-1])
-            # Удаляем первый найденный элемент с таким именем из basket
-            basket.remove(item_name)
-            # Обновляем таблицу после удаления элемента
-            self.populate_table()
-            # Эмитируем сигнал
-            self.basket_updated.emit(self.name)
-        else:
+        if not selected_items:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите продукт для удаления.")
+            return
+        row_index = selected_items[0].row()
+        id_item = self.table.item(row_index, 4)
+        product_id = int(id_item.text())
+
+        if self.basket.get(product_id, 0) > 1:
+            self.basket[product_id] -= 1
+        else:
+            self.basket.pop(product_id, None)
+
+        self.populate_table()
 
     def oformlenie_zakaza(self):
-        global basket, summ_basket
+        # 1. Проверка корзины
+        if self.is_basket_empty():
+            self.show_warning_dialog("Ваша корзина пуста!", width=300, height=100)
+            return
 
-        if len(basket) == 0:
-            warning_dialog = QDialog()
-            warning_dialog.setStyleSheet("""
-                QDialog {
-                    background-color: white;
-                }
-                """)
-            warning_dialog.setWindowTitle("Ошибка!")
-            warning_dialog.setGeometry(810, 490, 300, 100)
-            warning_layout = QVBoxLayout()
-            warning_label = QLabel("Ваша корзина пуста!", warning_dialog)
-            warning_label.setStyleSheet('background-color: white')
-            warning_label.setFont(QFont("Arial", 12))
-            warning_layout.addWidget(warning_label, alignment=Qt.AlignmentFlag.AlignCenter)
-            warning_dialog.setLayout(warning_layout)
-            warning_dialog.exec()
+        # 2. Проверка баланса
+        if self.balans < self.summ_basket:
+            self.show_warning_dialog(
+                "К сожалению, на вашем счете недостаточно средств для совершения данной операции.",
+                width=300, height=150
+            )
+            return
 
-        else:
+        # 3. Основной диалог оформления заказа
+        self.show_order_dialog()
 
-            if int(self.balans) < summ_basket:
-                dialog = QDialog(self)
-                dialog.setWindowTitle("Ой!")
-                dialog.setGeometry(630, 465, 300, 150)
-                dialog.setStyleSheet("""
-                    QDialog {
-                        background-color: white;
-                    }
-                    """)
+    def is_basket_empty(self):
+        return not self.basket
 
-                layout = QVBoxLayout()
-                # Добавляем текст
-                label = QLabel("К сожалению, на вашем счете недостаточно средств для совершения данной операции.",
-                               dialog)
-                label.setStyleSheet('background-color: white')
-                # Устанавливаем шрифт для QLabel
-                font = QFont("Arial", 12)
-                label.setFont(font)
-                layout.addWidget(label)
-                # Добавляем пользовательскую кнопку
-                custom_button = QPushButton("Пополнить баланс", dialog)
-                custom_button.setStyleSheet("""
-                                QPushButton {
-                                    border-radius: 10px;
-                                    color: white;
-                                    background-color: rgb(0, 220, 106);
-                                    padding: 10px;
-                                }
-                                QPushButton:hover {
-                                    background-color: rgb(0, 152, 0);
-                                }
-                            """)
+    def show_warning_dialog(self, message, width=300, height=100):
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Ошибка!" if "пуст" in message else "Ой!")
+        dialog.setGeometry(810, 490, width, height)
+        dialog.setStyleSheet("QDialog { background-color: white; }")
 
-                custom_button.clicked.connect(lambda: self.switch_of_poplnenie_balans(dialog))
-                layout.addWidget(custom_button, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout = QVBoxLayout()
+        label = QLabel(message, dialog)
+        label.setStyleSheet("background-color: white")
+        label.setFont(QFont("Arial", 12))
+        layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
 
-                dialog.setLayout(layout)
-                dialog.exec()
+        # custom_button = QPushButton("Пополнить баланс", dialog)
+        # custom_button.setStyleSheet("""
+        #                 QPushButton {
+        #                     border-radius: 10px;
+        #                     color: white;
+        #                     background-color: rgb(0, 220, 106);
+        #                     padding: 10px;
+        #                 }
+        #                 QPushButton:hover {
+        #                     background-color: rgb(0, 152, 0);
+        #                 }
+        #             """)
+        #
+        # custom_button.clicked.connect(lambda: self.switch_of_add_balans(dialog))
+        # layout.addWidget(custom_button, alignment=Qt.AlignmentFlag.AlignCenter)
 
-            else:
-                dialog = QDialog(self)
-                dialog.setWindowTitle("Оформление заказа")
-                dialog.setGeometry(710, 465, 500, 150)
-                dialog.setStyleSheet("""
-                    QDialog {
-                        background-color: white;
-                    }
-                    """)
+        dialog.setLayout(layout)
+        dialog.exec()
 
-                layout = QVBoxLayout()
-                # Добавляем текст
-                label_1 = QLabel("Укажите адрес доставки:", dialog)
-                label_1.setStyleSheet('background-color: white')
-                label_1.setFont(QFont("Arial", 12))
-                layout.addWidget(label_1)
+    def show_order_dialog(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Оформление заказа")
+        dialog.setGeometry(710, 465, 500, 150)
+        dialog.setStyleSheet("QDialog { background-color: white; }")
 
-                # Поле для ввода адреса
-                line_edit = QLineEdit(dialog)
-                line_edit.setFont(QFont("Arial", 12))
-                line_edit.setStyleSheet('background-color: white')
-                layout.addWidget(line_edit)
+        layout = QVBoxLayout()
 
-                # Добавляем пользовательскую кнопку
-                custom_button = QPushButton("Оформить заказ", dialog)
-                custom_button.setStyleSheet("""
-                                QPushButton {
-                                    border-radius: 10px;
-                                    color: white;
-                                    background-color: rgb(0, 220, 106);
-                                    padding: 10px;
-                                }
-                                QPushButton:hover {
-                                    background-color: rgb(0, 152, 0);
-                                }
-                            """)
+        # Адрес доставки
+        label = QLabel("Укажите адрес доставки:", dialog)
+        label.setFont(QFont("Arial", 12))
+        layout.addWidget(label)
+        line_edit = QLineEdit(dialog)
+        line_edit.setFont(QFont("Arial", 12))
+        layout.addWidget(line_edit)
 
-                def on_order_click():
-                    global basket, summ_basket
-                    if not line_edit.text().strip():
-                        QMessageBox.warning(self, "Ошибка", "Пожалуйста, введите адрес доставки.")
-                    else:
-                        users[self.name][5] -= summ_basket
-                        basket.clear()
-                        summ_basket = 0
+        # Кнопка оформления
+        custom_button = QPushButton("Оформить заказ", dialog)
+        custom_button.setStyleSheet("""
+            QPushButton {
+                border-radius: 10px;
+                color: white;
+                background-color: rgb(0, 220, 106);
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(0, 152, 0);
+            }
+        """)
+        custom_button.clicked.connect(lambda: self.confirm_order(dialog, line_edit))
+        layout.addWidget(custom_button, alignment=Qt.AlignmentFlag.AlignCenter)
 
-                        with open('system_file\\users.csv', 'w') as file:
-                            json.dump(users, file, ensure_ascii=False, indent=2)
+        dialog.setLayout(layout)
+        dialog.exec()
 
-                        dialog.accept()  # Закрываем диалог перед переходом на главный экран
-                        QMessageBox.information(self, "Успех", "Ваш заказ успешно оформлен.")
-                        self.swith_of_main()
+    def confirm_order(self, dialog, line_edit):
+        address = line_edit.text().strip()
+        if not address:
+            QMessageBox.warning(self, "Ошибка", "Пожалуйста, введите адрес доставки.")
+            return
 
-                custom_button.clicked.connect(on_order_click)
-                layout.addWidget(custom_button, alignment=Qt.AlignmentFlag.AlignCenter)
+        # Списание средств
+        self.database_user_manager.set_balance_by_id(
+            user_id=self.user_id,
+            new_balance=self.balans - self.summ_basket
+        )
 
-                dialog.setLayout(layout)
-                dialog.exec()
+        for product, quantity in self.basket.items():
+            self.database_orders_manager.write_row(product, self.user_id, quantity)
+        self.database_orders_manager.save()
 
-    def swith_of_main(self):
-        self.basket_updated.emit(self.name)
-        self.hide()
-        main_window.show()
+        self.basket.clear()
+        self.update_label()
 
-    def switch_of_poplnenie_balans(self, dialog):
-        self.plus_balans = Poplnenie_balansa(self.name)
-        self.plus_balans.balance_updated.connect(main_window.update_balance_label)
-        self.close()
         dialog.accept()
-        self.plus_balans.show()
+        QMessageBox.information(self, "Успех", "Ваш заказ успешно оформлен.")
+
+    # def switch_of_add_balans(self, dialog):
+    #     self.plus_balans = AddBalance(self.database_user_manager, self.user_id)
+    #     self.close()
+    #     dialog.accept()
+    #     self.plus_balans.show()
+
+    def switch_of_main(self):
+        self.basket_updated.emit(self.basket)
+        self.close()
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    database_product_manager = DataBaseProductManager()
+    database_user_manager = DataBaseUserManager()
+    basket_window = BasketWindow(user_id=100,
+                                 database_user_manager=database_user_manager,
+                                 database_product_manager=database_product_manager,
+                                 basket={0: 1, 2: 2, 7: 1})
+    basket_window.show()
+    sys.exit(app.exec())
