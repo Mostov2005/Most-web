@@ -1,20 +1,17 @@
-import json
-import sys
-import re
 import os
-import shutil
+import sys
 
-from PyQt6.QtCore import pyqtSignal, QPropertyAnimation, QRect, QEasingCurve, Qt, QRegularExpression
-from PyQt6.QtGui import QPixmap, QIntValidator, QFont, QRegularExpressionValidator
-from PyQt6.uic import loadUi
-from PyQt6.QtWidgets import QTableWidgetItem, QDialog, QRadioButton, QButtonGroup, QComboBox, QFileDialog
-from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QLabel, QVBoxLayout, QMainWindow, QMessageBox, QLineEdit
-
-from core import PasswordHasher
+from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import QDialog, QFileDialog, QApplication
+from PyQt6.QtWidgets import QPushButton, QLabel, QVBoxLayout, QLineEdit
+from database import get_abs_path
 
 
 # Добавление товаров(Подраздел для работников)
 class AddProductDialog(QDialog):
+    product_added = pyqtSignal(dict)
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.resize(400, 300)
@@ -28,7 +25,7 @@ class AddProductDialog(QDialog):
         self.add_button.setStyleSheet("color: white; background-color: rgb(0, 220, 106)")
 
         font = QFont()
-        font.setPointSize(12)
+        font.setPointSize(14)
         self.browse_button.setFont(font)
         self.add_button.setFont(font)
         self.name_edit.setFont(font)
@@ -68,31 +65,33 @@ class AddProductDialog(QDialog):
         self.add_button.clicked.connect(self.add_product)
 
     def browse_image(self):
-        filename, _ = QFileDialog.getOpenFileName(self, "Select Image", "", "Images (*.png *.jpg)")
+        filename, _ = QFileDialog.getOpenFileName(
+            self,
+            "Выберите изображение",
+            get_abs_path(),  # папка по умолчанию
+            "Images (*.png *.jpg)"
+        )
         if filename:
             self.image_label.setText(os.path.basename(filename))
             self.image_path = filename
 
-    # def add_product(self):
-    #     name = self.name_edit.text()
-    #     price = self.price_edit.text()
-    #     image = getattr(self, "image_path", "")
-    #
-    #     # Проверяем, чтобы все поля были заполнены
-    #     if name and price and image:
-    #         # Копируем изображение в папку с изображениями
-    #         image_filename = os.path.basename(image)
-    #         destination_path = os.path.join(
-    #             "pictures", image_filename)
-    #         shutil.copyfile(image, destination_path)
-    #
-    #         image = destination_path
-    #
-    #         product = {"name": name, "price": int(price), "image": image}
-    #         products.append(product)
-    #         with open('system_file\\products.json', 'w', encoding='UTF-8') as file:
-    #             json.dump(products, file, indent=2, ensure_ascii=False)
-    #
-    #         self.close()
-    #     else:
-    #         self.error_label.setText('Заполните все поля')
+    def add_product(self):
+        name = self.name_edit.text()
+        price = self.price_edit.text()
+        image = getattr(self, "image_path", "")
+
+        # Проверяем, чтобы все поля были заполнены
+        if name and price and image:
+            product = {"name": name, "price": int(price), "image": image}
+            self.product_added.emit(product)
+
+            self.close()
+        else:
+            self.error_label.setText('Заполните все поля!')
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = AddProductDialog()
+    window.show()
+    sys.exit(app.exec())

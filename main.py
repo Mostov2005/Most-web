@@ -3,12 +3,15 @@ from PyQt6.QtWidgets import QApplication
 
 from core import password_hasher
 from database import DataBaseUserManager
+from database import DataBaseProductManager
 from ui import WelcomeWindow, MainWindow
 from database import get_abs_path
+
 
 class MostWeb:
     def __init__(self):
         self.database_user_manager = DataBaseUserManager()
+        self.database_product_manager = DataBaseProductManager()
 
         self.welcome_window = WelcomeWindow(self.database_user_manager)
         self.welcome_window.valid_user_signal.connect(self.handle_window_signal)
@@ -19,8 +22,8 @@ class MostWeb:
         print('main')
         self.welcome_window.close()
         print(id, type_avt)
-        # self.MainWindow = (self.databasemanager, id, type_avt)
-        # self.MainWindow.show()
+        main_window = MainWindow(self.database_user_manager, self.database_product_manager, 100)
+        main_window.show()
 
 
 if __name__ == "__main__":

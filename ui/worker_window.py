@@ -1,30 +1,30 @@
-import json
 import sys
-import re
-import os
-import shutil
 
-from PyQt6.QtCore import pyqtSignal, QPropertyAnimation, QRect, QEasingCurve, Qt, QRegularExpression
-from PyQt6.QtGui import QPixmap, QIntValidator, QFont, QRegularExpressionValidator
+from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt6.QtWidgets import QTableWidgetItem
 from PyQt6.uic import loadUi
-from PyQt6.QtWidgets import QTableWidgetItem, QDialog, QRadioButton, QButtonGroup, QComboBox, QFileDialog
-from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QLabel, QVBoxLayout, QMainWindow, QMessageBox, QLineEdit
 
-from core import PasswordHasher
+from database import DataBaseProductManager
+from database import get_abs_path
+from widgets import AddProductDialog
+
 
 # Для работников
+class WorkerWindow(QMainWindow):
+    back_signal = pyqtSignal()
 
-class SetingForWorkers(QMainWindow):
-    table_updated = pyqtSignal()
-
-    def __init__(self):
+    def __init__(self, database_product_manager):
         super().__init__()
-        loadUi("system_file\\for_workers.ui", self)
+        ui_path = get_abs_path("system_file", 'for_workers.ui')
+        loadUi(ui_path, self)
         self.move(0, 0)
 
+        self.database_product_manager = database_product_manager
+
         # Подключаем сигнал к слоту для открытия окна добавления товара
-        self.add_product_btn.clicked.connect(self.open_add_product_dialog)
         self.delete_btn.clicked.connect(self.delete_product)
+        self.add_product_btn.clicked.connect(self.open_add_product_dialog)
         self.back_menu_btn.clicked.connect(self.switch_of_main)
 
         # Размеры таблицы
@@ -34,55 +34,61 @@ class SetingForWorkers(QMainWindow):
 
         self.populate_table()
 
-    def open_add_product_dialog(self):
-        dialog = AddProductDialog(self)
-        dialog.exec()
-        self.populate_table()
-
     def populate_table(self):
-        # Очищаем таблицу
         self.table.setRowCount(0)
+        products = self.database_product_manager.get_products()
 
-        for row, item in enumerate(products):
-            self.table.insertRow(row)
-            self.table.setItem(row, 0, QTableWidgetItem(item["name"]))
-            self.table.setItem(row, 1, QTableWidgetItem(str(item["price"])))
-            self.table.setItem(row, 2, QTableWidgetItem(item["image"]))
+        for i in range(len(products)):
+            row = products.iloc[i]
+
+            table_row = self.table.rowCount()
+            self.table.insertRow(table_row)
+
+            self.table.setItem(table_row, 0, QTableWidgetItem(str(row['name'])))
+            self.table.setItem(table_row, 1, QTableWidgetItem(str(row['price'])))
+            self.table.setItem(table_row, 2, QTableWidgetItem(str(row['image'])))
 
     def delete_product(self):
-        global basket, summ_basket
-        # Получаем список выбранных элементов
         selected_items = self.table.selectedItems()
-        name_tovarr = selected_items[0].text()
-
-        if selected_items:
-            reply = QMessageBox.question(
-                self,
-                "Подтверждение удаления",
-                f'Вы уверены, что хотите удалить товар "{selected_items[0].text()}"?',
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                QMessageBox.StandardButton.No
-            )
-            if reply == QMessageBox.StandardButton.Yes:
-                selected_row = selected_items[0].row()
-                self.table.removeRow(selected_row)
-
-                image_path = products[selected_row]["image"]
-                if os.path.exists(image_path):
-                    os.remove(image_path)
-
-                while name_tovarr in basket:
-                    basket.remove(name_tovarr)
-                    summ_basket -= int(products[selected_row]["price"])
-
-                del products[selected_row]
-                with open('system_file\\products.json', 'w', encoding='UTF-8') as file:
-                    json.dump(products, file, indent=2, ensure_ascii=False)
-
-        else:
+        if not selected_items:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите продукт для удаления.")
+            return
+        name_product = selected_items[0].text()
+
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение удаления",
+            f'Вы уверены, что хотите удалить товар "{selected_items[0].text()}"?',
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No
+        )
+        if reply == QMessageBox.StandardButton.Yes:
+            selected_row = selected_items[0].row()
+            self.table.removeRow(selected_row)
+
+            id_delete_product = self.database_product_manager.get_id_product_by_name(name_product)
+            self.database_product_manager.delete_product(id_delete_product)
+
+    def open_add_product_dialog(self):
+        dialog = AddProductDialog(self)
+        dialog.product_added.connect(self.add_product)
+        dialog.exec()
+
+    def add_product(self, product):
+        self.database_product_manager.add_product(product['name'],
+                                                  product['price'],
+                                                  product['image'])
+        self.populate_table()
 
     def switch_of_main(self):
-        self.hide()
-        self.table_updated.emit()
-        main_window.show()
+        self.back_signal.emit()
+        self.close()
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    database_product_manager = DataBaseProductManager()
+
+    worker_window = WorkerWindow(database_product_manager)
+    worker_window.show()
+    sys.exit(app.exec())

@@ -13,6 +13,7 @@ from widgets.product_table import ProductTable
 from core.recommender import Recommender
 from ui.admin_window import AdminWindow
 from ui.balance_window import AddBalance
+from ui.worker_window import WorkerWindow
 
 
 # Главное окно
@@ -36,6 +37,8 @@ class MainWindow(QMainWindow):
         self.poisk_edit.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.button_admin.clicked.connect(self.switch_of_for_admin)
+        self.button_worker.clicked.connect(self.switch_to_worker_menu)
+
         self.toggle_btn.clicked.connect(self.toggle_menu)
         self.popolnenie_balans_btn.clicked.connect(self.switch_to_balans_window)
         # self.basket_btn.clicked.connect(self.switch_to_basket)
@@ -78,6 +81,12 @@ class MainWindow(QMainWindow):
         self.for_admin_window.show()
         self.hide()
 
+    def switch_to_worker_menu(self):
+        self.for_workers_window = WorkerWindow(self.database_product_manager)
+        self.for_workers_window.back_signal.connect(lambda: (self.show(), self.update_table()))
+        self.for_workers_window.show()
+        self.hide()
+
     def switch_to_balans_window(self):
         self.plus_balans = AddBalance(self.database_user_manager, self.user_id)
         self.plus_balans.back_signal.connect(self.show)
@@ -89,13 +98,6 @@ class MainWindow(QMainWindow):
     def update_balance_button(self):
         balance_user = self.database_user_manager.get_balance_by_id(self.user_id)
         self.popolnenie_balans_btn.setText(f'+ {balance_user}₽')
-
-    #
-    # def switch_to_worker_menu(self):
-    #     self.for_workers_window = SetingForWorkers()
-    #     self.for_workers_window.table_updated.connect(self.update_table)
-    #     self.close()
-    #     self.for_workers_window.show()
 
     # def update_basket_label(self):
     #     self.count_tovar_label.setText(f'{len(basket)}: {summ_basket} ₽')

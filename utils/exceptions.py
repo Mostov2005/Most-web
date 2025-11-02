@@ -12,6 +12,13 @@ class InvalidAddUserError(Exception):
         super().__init__(self.message)
 
 
+class InvalidAddProductError(Exception):
+    def __init__(self, message=""):
+        self.start_message = "Не удалось добавить товар: "
+        self.message = self.start_message + message
+        super().__init__(self.message)
+
+
 class InvalidJsonError(Exception):
     def __init__(self, message=""):
         self.start_message = "Не удалось считать товары: "

@@ -5,6 +5,3 @@ from .main_window import MainWindow
 from .basket_window import Oformalenie_Zakaza
 from .balance_window import AddBalance
 from .admin_window import AdminWindow
-from .worker_window import SetingForWorkers
-from .product_dialog import AddProductDialog
-from .unsaved_changes_helper import UnsavedChangesHelper

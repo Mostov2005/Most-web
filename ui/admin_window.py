@@ -1,4 +1,3 @@
-import json
 import sys
 import os
 
@@ -8,7 +7,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox, QLineEdit
 from PyQt6.QtWidgets import QTableWidgetItem, QComboBox
 from PyQt6.uic import loadUi
 from database import DataBaseUserManager
-from ui.unsaved_changes_helper import UnsavedChangesHelper
+from widgets.unsaved_changes_helper import UnsavedChangesHelper
 
 
 # Для администраторов
@@ -174,10 +173,8 @@ class AdminWindow(QMainWindow):
             elif choice == "cancel":
                 return
 
-        self.is_dirty = False
         self.back_signal.emit()
         self.close()
-
 
     def closeEvent(self, event):
         if self.is_dirty:

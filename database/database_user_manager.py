@@ -13,6 +13,7 @@ class DataBaseUserManager:
             os.path.join(os.path.dirname(__file__), '..', 'system_file', 'users.csv')
         )
         self.__read_users()
+        # print(self.users)
 
     def __read_users(self):
         try:
@@ -38,7 +39,9 @@ class DataBaseUserManager:
         if row.empty:
             return None
         if self.ph.hash_password(password) == row.iloc[0]["hash"]:
-            return int(row.iloc[0]['id']), row['role']
+            user_id = int(row.index[0])
+            role = row.iloc[0]["role"]
+            return user_id, role
         return None
 
     def check_user_availability(self, login):
@@ -100,8 +103,8 @@ class DataBaseUserManager:
         self.users.loc[user_id, "balance"] = balance
 
     def save(self) -> None:
-        """Сохраняет все изменения обратно в CSV."""
-        self.users.to_csv(self.file_path, index=True, encoding='UTF-8')
+        """Сохраняет все изменения в CSV."""
+        self.users.to_csv(self.file_path, index=True, index_label="id", encoding='UTF-8')
 
     def delete_user(self, user_id: int) -> None:
         """
@@ -111,7 +114,8 @@ class DataBaseUserManager:
             raise ValueError(f"Пользователь с id={user_id} не найден")
 
         # Удаляем пользователя
-        self.users = self.users.drop(user_id)
+        self.users.drop(user_id, inplace=True)
+        # self.users.reset_index(drop=True, inplace=True)
 
     def set_balance_by_id(self, user_id, new_balance):
         self.users.loc[user_id, "balance"] = new_balance
@@ -120,7 +124,7 @@ class DataBaseUserManager:
 
 if __name__ == "__main__":
     database_manager = DataBaseUserManager()
-    print(database_manager.check_user_availability('32133'))
+    print(database_manager.check_user_availability('100'))
     print(database_manager.get_balance_by_id(100))
 
     # database_manager.add_new_user("1", "1", "1", "1")
