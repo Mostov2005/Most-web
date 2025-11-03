@@ -1,26 +1,40 @@
 import sys
-from PyQt6.QtWidgets import QApplication
+from typing import Any
 
-from core import password_hasher
-from database import DataBaseUserManager
-from database import DataBaseProductManager
+from PyQt6.QtWidgets import QApplication
+from database import DataBaseUserManager, DataBaseProductManager
 from ui import WelcomeWindow, MainWindow
-from database import get_abs_path
 
 
 class MostWeb:
-    def __init__(self):
-        self.database_user_manager = DataBaseUserManager()
-        self.database_product_manager = DataBaseProductManager()
+    """
+    Главный класс приложения, который управляет всеми окнами
+    """
 
-        self.welcome_window = WelcomeWindow(self.database_user_manager)
+    def __init__(self) -> None:
+        # Менеджеры работы с базой данных
+        self.database_user_manager: DataBaseUserManager = DataBaseUserManager()
+        self.database_product_manager: DataBaseProductManager = DataBaseProductManager()
+
+        # Окно приветствия
+        self.welcome_window: WelcomeWindow = WelcomeWindow(self.database_user_manager)
         self.welcome_window.valid_user_signal.connect(self.handle_window_signal)
         self.welcome_window.show()
 
-    def handle_window_signal(self, id, type_avt):
-        # Обработка сигнала, который пришел из WelcomeWindow
+    def handle_window_signal(self, id_user: int, type_avt: Any) -> None:
+        """
+        Обработка сигнала успешной авторизации пользователя из WelcomeWindow.
+
+        :param id_user: ID авторизованного пользователя
+        :param type_avt: Тип аккаунта пользователя (например, роль)
+        """
         self.welcome_window.close()
-        main_window = MainWindow(self.database_user_manager, self.database_product_manager, 100, type_avt)
+        main_window: MainWindow = MainWindow(
+            self.database_user_manager,
+            self.database_product_manager,
+            id_user,
+            type_avt
+        )
         main_window.show()
 
 
@@ -28,16 +42,3 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     most_web = MostWeb()
     sys.exit(app.exec())
-
-# welcome_window.name_updated.connect(main_window.upda te_balance_label)
-
-# try:
-#     with open('system_file\\products.json', 'r', encoding='UTF-8') as file:
-#         products = json.load(file)
-# except json.decoder.JSONDecodeError:
-#     products = []
-# try:
-#     with open('system_file\\users.csv', 'r', encoding='UTF-8') as file:
-#         users = json.load(file)
-# except json.decoder.JSONDecodeError:
-#     users = {}

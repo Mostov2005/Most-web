@@ -1,76 +1,83 @@
-import pandas as pd
-import os
 import csv
-from utils import InvalidCsvUserError, InvalidAddUserError
+import pandas as pd
 from core import PasswordHasher
+from database.get_abs_path import get_abs_path
+from utils import InvalidCsvUserError, InvalidAddUserError
 
 
 class DataBaseUserManager:
-    def __init__(self):
-        self.users = pd.DataFrame()
+    """Менеджер работы с пользователями в CSV"""
+
+    def __init__(self) -> None:
+        self.users: pd.DataFrame = pd.DataFrame()
         self.ph = PasswordHasher
-        self.file_path = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), '..', 'system_file', 'users.csv')
-        )
+        self.file_path: str = get_abs_path('system_file', 'users.csv')
         self.__read_users()
         # print(self.users)
 
-    def __read_users(self):
+    def __read_users(self) -> None:
+        """Чтение пользователей из CSV"""
         try:
-            self.users = pd.read_csv(self.file_path, encoding='UTF-8', index_col="id", dtype={"phone": str})
+            self.users = pd.read_csv(
+                self.file_path,
+                encoding='UTF-8',
+                index_col="id",
+                dtype={"phone": str}
+            )
         except Exception as e:
             print(InvalidCsvUserError(str(e)))
 
-    def __get_max_id(self):
-        try:
-            with open(self.file_path, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                ids = [int(row["id"]) for row in reader]
-                max_id = max(ids) if ids else 0
-        except FileNotFoundError:
-            max_id = 0
+    def get_max_id(self) -> int:
+        """Получение максимального ID пользователя"""
+        max_id: int = self.users.index.max()
         return max_id
 
-    def get_users(self):
+    def get_users(self) -> pd.DataFrame:
+        """Получение всех пользователей"""
         return self.users
 
-    def check_valid_users(self, name, password):
-        row = self.users.loc[self.users["name"] == name]
+    def check_valid_users(self, name: str, password: str) -> tuple[int, str] | None:
+        """Проверка логина и пароля пользователя"""
+        row: pd.DataFrame = self.users.loc[self.users["name"] == name]
         if row.empty:
             return None
         if self.ph.hash_password(password) == row.iloc[0]["hash"]:
-            user_id = int(row.index[0])
-            role = row.iloc[0]["role"]
+            user_id: int = int(row.index[0])
+            role: str = row.iloc[0]["role"]
             return user_id, role
         return None
 
-    def check_user_availability(self, login):
+    def check_user_availability(self, login: str) -> bool:
+        """Проверка существования логина"""
         return not self.users.loc[self.users["name"] == login].empty
 
-    def check_email_availability(self, email):
+    def check_email_availability(self, email: str) -> bool:
+        """Проверка существования email"""
         return not self.users.loc[self.users["email"] == email].empty
 
-    def check_phone_availability(self, phone):
-        cleaned_phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
+    def check_phone_availability(self, phone: str) -> bool:
+        """Проверка существования номера телефона"""
+        cleaned_phone: str = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
         return not self.users.loc[self.users["phone"] == cleaned_phone].empty
 
-    def add_new_user(self, login: str, email: str, phone: str, password: str):
-        cleaned_phone = (phone.replace("(", "")
-                         .replace(")", "")
-                         .replace("-", "")
-                         .replace(" ", ""))
-        hash_password = self.ph.hash_password(password)
+    def add_new_user(self, login: str, email: str, phone: str, password: str) -> None:
+        """Добавление нового пользователя"""
+        cleaned_phone: str = (phone.
+                              replace("(", "").
+                              replace(")", "").
+                              replace("-", "").
+                              replace(" ", ""))
+        hash_password: str = self.ph.hash_password(password)
 
-        # Данные для записи
-        new_id = self.__get_max_id() + 1
         try:
-            self.users.loc[len(self.users)] = {
+            new_id = self.get_max_id() + 1
+            self.users.loc[new_id] = {
                 'id': new_id,
                 'name': login,
                 'hash': hash_password,
                 'email': email,
                 'phone': cleaned_phone,
-                'role': 'buyer',
+                'role': 'Buyer',
                 'balance': 0
             }
 
@@ -78,20 +85,31 @@ class DataBaseUserManager:
         except Exception as e:
             print(InvalidAddUserError(str(e)))
 
-    def get_user_by_id(self, user_id):
+    def get_user_by_id(self, user_id: int) -> pd.Series:
+        """Получение пользователя по ID"""
         return self.users.loc[user_id]
 
-    def get_balance_by_id(self, user_id):
-        row = self.users.loc[user_id]
+    def get_balance_by_id(self, user_id: int) -> int:
+        """Получение баланса пользователя по ID"""
+        row: pd.Series = self.users.loc[user_id]
         return row['balance']
 
-    def get_name_by_id(self, user_id):
-        row = self.users.loc[user_id]
+    def get_name_by_id(self, user_id: int) -> str:
+        """Получение имени пользователя по ID"""
+        row: pd.Series = self.users.loc[user_id]
         return row['name']
 
-    def update_user(self, user_id: int, username: str, password_hash: str,
-                    email: str, number: str, role: str, balance: int) -> None:
-        """Обновляет данные одного пользователя в DataFrame."""
+    def update_user(
+            self,
+            user_id: int,
+            username: str,
+            password_hash: str,
+            email: str,
+            number: str,
+            role: str,
+            balance: int
+    ) -> None:
+        """Обновление данных пользователя"""
         if user_id not in self.users.index:
             raise ValueError(f"Пользователь с id={user_id} не найден")
 
@@ -103,28 +121,24 @@ class DataBaseUserManager:
         self.users.loc[user_id, "balance"] = balance
 
     def save(self) -> None:
-        """Сохраняет все изменения в CSV."""
+        """Сохраняет все изменения в CSV"""
         self.users.to_csv(self.file_path, index=True, index_label="id", encoding='UTF-8')
 
     def delete_user(self, user_id: int) -> None:
-        """
-        Удаляет пользователя по его ID из DataFrame и сохраняет изменения в CSV.
-        """
+        """Удаление пользователя по ID"""
         if user_id not in self.users.index:
             raise ValueError(f"Пользователь с id={user_id} не найден")
 
-        # Удаляем пользователя
         self.users.drop(user_id, inplace=True)
-        # self.users.reset_index(drop=True, inplace=True)
 
-    def set_balance_by_id(self, user_id, new_balance):
+    def set_balance_by_id(self, user_id: int, new_balance: int) -> None:
+        """Установка нового баланса пользователю"""
         self.users.loc[user_id, "balance"] = new_balance
         self.save()
 
 
 if __name__ == "__main__":
-    database_manager = DataBaseUserManager()
-    print(database_manager.check_user_availability('100'))
-    print(database_manager.get_balance_by_id(100))
-
-    # database_manager.add_new_user("1", "1", "1", "1")
+    database_manager: DataBaseUserManager = DataBaseUserManager()
+    # print(database_manager.check_user_availability('100'))
+    # print(database_manager.get_balance_by_id(100))
+    database_manager.add_new_user("1", "1", "1", "1")

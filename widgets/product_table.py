@@ -1,24 +1,31 @@
-import json
 import os
 import sys
+from typing import List, Dict, Any
 
 from PyQt6.QtCore import Qt, pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidget
 
-from widgets.product_widget import ProductWidget
-from database import DataBaseProductManager
 from core import Recommender
+from database import DataBaseProductManager
+from widgets.product_widget import ProductWidget
 
 
-# Класс 2: Таблица продуктов
 class ProductTable(QObject):
+    """
+    Класс для управления таблицей продуктов в QTableWidget.
+    """
     add_product_in_basket_signal = pyqtSignal(int)
 
-    def __init__(self, table_widget: QTableWidget):
+    def __init__(self, table_widget: QTableWidget) -> None:
         super().__init__()
-        self.table_widget = table_widget
+        self.table_widget: QTableWidget = table_widget
 
-    def update_table(self, products):
+    def update_table(self, products: List[Dict[str, Any]]) -> None:
+        """
+        Обновляет таблицу виджетами продуктов.
+
+        :param products: Список продуктов (каждый продукт - словарь)
+        """
         self.table_widget.clear()
 
         count_col = min(4, len(products))  # максимум 4 колонки
@@ -41,10 +48,11 @@ class ProductTable(QObject):
             file_path = os.path.abspath(
                 os.path.join(os.path.dirname(__file__), '..', product.get("image", ""))
             )
+
             widget = ProductWidget(
                 product.name,
                 product.get("name", ""),
-                product.get("price", ""),
+                product.get("price", 0),
                 file_path,
                 self.table_widget
             )
@@ -59,28 +67,35 @@ class ProductTable(QObject):
         self.table_widget.setSelectionMode(QTableWidget.SelectionMode.NoSelection)
         self.table_widget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
-    def add_product_in_basket(self, product_id):
-        # print(product_id)
+    def add_product_in_basket(self, product_id: int) -> None:
+        """
+        Активирует сигнал добавления продукта в корзину.
+
+        :param product_id: ID продукта
+        """
         self.add_product_in_basket_signal.emit(product_id)
 
 
-# Класс 3: Главное окно
 class TestProductWindow(QMainWindow):
-    def __init__(self, database_product_manager):
+    """
+    Главное окно приложения с таблицей продуктов.
+    """
+
+    def __init__(self, database_product_manager: DataBaseProductManager) -> None:
         super().__init__()
         self.setWindowTitle("Товары")
         self.setGeometry(100, 100, 1300, 800)
 
-        self.table_widget = QTableWidget(self)
+        self.table_widget: QTableWidget = QTableWidget(self)
         self.setCentralWidget(self.table_widget)
 
-        self.database_product_manager = database_product_manager
-        self.recommender = Recommender(self.database_product_manager)
-        products_id = self.recommender.get_recommendation_products_id()
+        self.database_product_manager: DataBaseProductManager = database_product_manager
+        self.recommender: Recommender = Recommender(self.database_product_manager)
 
-        self.products = self.database_product_manager.get_products_by_id(products_id)
+        products_id: List[int] = self.recommender.get_recommendation_products_id()
+        self.products: List[Dict[str, Any]] = self.database_product_manager.get_products_by_id(products_id)
 
-        self.product_table = ProductTable(self.table_widget)
+        self.product_table: ProductTable = ProductTable(self.table_widget)
         self.product_table.update_table(self.products)
 
 
