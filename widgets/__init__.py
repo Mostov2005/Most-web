@@ -2,3 +2,4 @@ from .product_table import ProductTable
 from .product_widget import ProductWidget
 from .sliding_menu import SlidingMenu
 from .product_dialog import AddProductDialog
+from .unsaved_changes_helper import UnsavedChangesHelper

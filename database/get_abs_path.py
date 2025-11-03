@@ -9,5 +9,6 @@ def get_abs_path(*args):
     base_dir = os.path.dirname(os.path.dirname(__file__))
     return os.path.abspath(os.path.join(base_dir, *args))
 
+
 if __name__ == '__main__':
     print(get_abs_path())

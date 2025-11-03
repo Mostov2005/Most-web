@@ -1,19 +1,24 @@
-# Информационная система интернет-магазина
+# Информационная система интернет-магазина (Most-Web)
 
 ## Функциональные возможности:
+
 ### Клиенты (покупатели):
+
 - Регистрация и авторизация.
 - Поиск и выбор товаров.
 - Добавление товаров в корзину.
 - Пополнение баланса.
 - Оформление и оплата заказов.
+- Система рекомендаций товаров (Пока что просто по порядку)
 
 ### Работники:
+
 - Добавление и удаление товаров в каталоге.
 - Управление заказами.
 - Работа с запасами и аналитика продаж.
 
 ### Администраторы:
+
 - Управление пользователями (просмотр базы данных, изменение ролей, редактирование данных).
 - Управление каталогом товаров.
 - Контроль заказов и предоставление аналитики.
@@ -21,72 +26,122 @@
 #### Аккаунт администратора
 
 ```
-Логин: Mostov
-Пароль: admin123_
+Логин: Admin    
+Пароль: Admin123_
 ```
-
 
 ## Технологии
-Проект разработан с использованием **Python** и библиотеки **PyQt6** для создания графического интерфейса пользователя (GUI). Данные хранятся в формате JSON.
+
+Проект разработан с использованием **Python** и библиотеки **PyQt6**
+для создания графического интерфейса пользователя (GUI). 
+Данные хранятся в формате CSV.
 
 ## Структура проекта
-- `main.py` — основной файл приложения, реализующий логику авторизации, регистрации, управления корзиной и заказами.
-- `system_file/` — директория с файлами интерфейсов (`.ui`) и базой данных (`users.json`, `products.json`).
-- `pictures/` — изображения товаров.
-
 
 ```
-internet_shop
-│── main.py                     # Точка входа в приложение
+Most-Web
 │
-├── core/                       # Логика (модель)
+├── main.py                     # Точка входа в приложение
+│
+├── core/                       # Бизнес-логика приложения
 │   ├── __init__.py
-│   ├── auth.py                 # Авторизация, регистрация, хеширование паролей
-│   ├── products.py             # Работа с товарами (загрузка, добавление, удаление)
-│   ├── users.py                # Работа с пользователями (роль, баланс, изменения)
-│   └── basket.py               # Логика корзины и заказов
+│   ├── password_hasher.py     # Хеширование паролей
+│   └── recommender.py         # Система рекомендаций товаров
 │
-├── database/
+├── database/                  # Работа с данными
 │   ├── __init__.py
-│   └── storage.py              # Чтение/запись users.json, products.json
+│   ├── database_user_manager.py     # Управление пользователями
+│   ├── database_product_manager.py  # Управление товарами
+│   ├── database_orders_manager.py   # Управление заказами
+│   └── get_abs_path.py       # Утилиты для работы с путями
 │
-├── ui/                         # Визуальные компоненты (виды/экраны)
+├── ui/                        # Пользовательский интерфейс
 │   ├── __init__.py
-│   ├── welcome_window.py       # WelcomeWindow (вход)
-│   ├── registration_window.py  # RegistrationWindow (регистрация)
-│   ├── main_window.py          # MainWindow (главное окно)
-│   ├── basket_window.py        # Oformlenie_Zakaza
-│   ├── balance_window.py       # Poplnenie_balansa
-│   ├── admin_window.py         # AdminWindow
-│   ├── worker_window.py        # SetingForWorkers
-│   └── product_dialog.py       # AddProductDialog
+│   ├── welcome_window.py      # Окно приветствия и авторизации
+│   ├── registration_window.py # Окно регистрации
+│   ├── main_window.py         # Главное окно приложения
+│   ├── basket_window.py       # Окно корзины и оформления заказа
+│   ├── balance_window.py      # Окно пополнения баланса
+│   ├── info_window.py         # Окно информации
+│   ├── admin_window.py        # Панель администратора
+│   └── worker_window.py       # Панель работника
 │
-├── widgets/                    # Кастомные виджеты
+├── widgets/                   # Кастомные виджеты
 │   ├── __init__.py
-│   ├── product_widget.py       # ProductWidget
-│   └── sliding_menu.py         # SlidingMenu
+│   ├── product_widget.py      # Виджет товара
+│   ├── product_table.py       # Таблица товаров
+│   ├── product_dialog.py      # Диалог добавления товара
+│   ├── sliding_menu.py        # Боковое меню для главного окна (Фильтры)
+│   └── unsaved_changes_helper.py # Помощник для отслеживания изменений
 │
-├── utils/
+├── utils/                     # Вспомогательные утилиты
 │   ├── __init__.py
-│   ├── validators.py           # Проверки логина, пароля, email, телефона
-│   └── exceptions.py           # Собственные исключения
+│   ├── validators.py          # Валидаторы данных
+│   └── exceptions.py          # Пользовательские исключения
 │
-└── system_file/                # .ui файлы и ресурсы
-    ├── welcome.ui
-    ├── registration.ui
-    ├── main_window.ui
-    ├── oformlenie_zakaza.ui
-    ├── plus_balans.ui
-    ├── for_admin.ui
-    ├── for_workers.ui
-    ├── users.json
-    └── products.json
+├── system_file/               # Файлы системы и конфигурации
+│   ├── *.ui                   # Файлы интерфейсов Qt Designer
+│   ├── users.csv              # База данных пользователей
+│   ├── products.csv           # База данных товаров
+│   ├── orders.csv             # База данных заказов
+│   └── Логотип.*              # Графические ресурсы
+│
+└── pictures/                  # Изображения товаров
+    └── *.jpg, *.png
 ```
 
+## Скриншоты
 
+### Окно входа
 
+<div style="text-align: center;">
+  <img src="Screenshots\welcome_window.png" alt="Мой скриншот" />
+</div>
 
-# Версии:
-## 30.05.2024 (Дата релиза на GitHub: 22.03.2025)
+### Окно регистрации
+
+<div style="text-align: center;">
+  <img src="Screenshots\registration_window.png" alt="Мой скриншот" />
+</div>
+
+### Главное окно
+
+<div style="text-align: center;">
+  <img src="Screenshots\main_window.png" alt="Мой скриншот" />
+</div>
+
+### Окно работников
+
+<div style="text-align: center;">
+  <img src="Screenshots\worker_window.png" alt="Мой скриншот" />
+</div>
+
+### Окно администраторов
+
+<div style="text-align: center;">
+  <img src="Screenshots\admin_window.png" alt="Мой скриншот" />
+</div>
+
+### Окно корзины
+
+<div style="text-align: center;">
+  <img src="Screenshots\basket_window.png" alt="Мой скриншот" />
+</div>
+
+### Окно пополнения баланса
+
+<div style="text-align: center;">
+  <img src="Screenshots\balans_window.png" alt="Мой скриншот" />
+</div>
+
+## Версии:
+
+### 1.0.0 Release (30.05.2024, GitHub: 22.03.2025)
+
 Это первая версия проекта, разработанная в соответствии с установленными
-требованиями. В будущем система будет обновляться и расширяться.
+требованиями. В будущем система будет обновляться и расширяться
+
+### 1.1.0 Release (03.11.2025)
+
+- Переработана структура проекта: код вынесен в модули и папки, вместо одного большого файла
+- Улучшена читаемость и поддержка кода
