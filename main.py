@@ -1,4 +1,6 @@
 import sys
+import qt_env
+
 from typing import Any
 
 from PyQt6.QtWidgets import QApplication

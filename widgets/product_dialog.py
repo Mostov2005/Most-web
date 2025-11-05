@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (
     QLabel, QVBoxLayout, QLineEdit
 )
 
+import qt_env  # noqa: F401
 from database import get_abs_path
 
 

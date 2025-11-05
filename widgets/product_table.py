@@ -5,6 +5,7 @@ from typing import List, Dict, Any
 from PyQt6.QtCore import Qt, pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidget
 
+import qt_env  # noqa: F401
 from core import Recommender
 from database import DataBaseProductManager
 from widgets.product_widget import ProductWidget

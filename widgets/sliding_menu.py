@@ -6,6 +6,8 @@ from PyQt6.QtWidgets import (
     QWidget, QApplication, QLabel, QRadioButton, QButtonGroup, QMainWindow
 )
 
+import qt_env  # noqa: F401
+
 
 class SlidingMenu(QWidget):
     """

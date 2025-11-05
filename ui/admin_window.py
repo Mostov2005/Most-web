@@ -5,6 +5,7 @@ from PyQt6.QtGui import QIntValidator, QFont
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox, QLineEdit, QTableWidgetItem, QComboBox
 from PyQt6.uic import loadUi
 
+import qt_env  # noqa: F401
 from database import DataBaseUserManager
 from database.get_abs_path import get_abs_path
 from widgets import UnsavedChangesHelper

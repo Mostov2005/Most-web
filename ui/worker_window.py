@@ -1,8 +1,10 @@
 import sys
+
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox, QTableWidgetItem
 from PyQt6.uic import loadUi
 
+import qt_env  # noqa: F401
 from database import DataBaseProductManager, get_abs_path
 from widgets import AddProductDialog
 

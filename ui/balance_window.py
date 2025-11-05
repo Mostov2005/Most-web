@@ -1,8 +1,11 @@
 import sys
+
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QPixmap, QIntValidator
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.uic import loadUi
+
+import qt_env  # noqa: F401
 from database import DataBaseUserManager, get_abs_path
 
 

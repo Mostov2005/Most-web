@@ -1,9 +1,11 @@
 import sys
+
 from PyQt6.QtCore import Qt, QRegularExpression, pyqtSignal
 from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from PyQt6.uic import loadUi
 
+import qt_env  # noqa: F401
 from database import DataBaseUserManager, get_abs_path
 from ui.info_window import InfoWindow
 from utils.validators import validate_login, validate_phone, validate_password

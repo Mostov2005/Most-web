@@ -1,4 +1,5 @@
 import sys
+
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QFont, QPixmap
 from PyQt6.QtWidgets import (
@@ -6,6 +7,8 @@ from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QPushButton, QLineEdit
 )
 from PyQt6.uic import loadUi
+
+import qt_env  # noqa: F401
 from database import DataBaseProductManager, DataBaseUserManager, DataBaseOrdersManager, get_abs_path
 
 

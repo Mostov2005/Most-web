@@ -4,6 +4,8 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QFont
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QPushButton
 
+import qt_env  # noqa: F401
+
 
 class ProductWidget(QWidget):
     """

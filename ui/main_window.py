@@ -1,8 +1,10 @@
 import sys
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.uic import loadUi
 
+import qt_env  # noqa: F401
 from core.recommender import Recommender
 from database import DataBaseUserManager, DataBaseProductManager, get_abs_path
 from ui.admin_window import AdminWindow
