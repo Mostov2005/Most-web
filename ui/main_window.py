@@ -6,10 +6,11 @@ from PyQt6.uic import loadUi
 
 import qt_env  # noqa: F401
 from core.recommender import Recommender
-from database import DataBaseUserManager, DataBaseProductManager, get_abs_path
+from database import DataBaseUserManager, DataBaseProductManager, DataBaseOrdersManager, get_abs_path
 from ui.admin_window import AdminWindow
 from ui.balance_window import AddBalance
 from ui.basket_window import BasketWindow
+from ui.profile_window import ProfileWindow
 from ui.worker_window import WorkerWindow
 from widgets.product_table import ProductTable
 from widgets.sliding_menu import SlidingMenu
@@ -18,7 +19,9 @@ from widgets.sliding_menu import SlidingMenu
 class MainWindow(QMainWindow):
     """Главное окно """
 
-    def __init__(self, database_user_manager: DataBaseUserManager, database_product_manager: DataBaseProductManager,
+    def __init__(self, database_user_manager: DataBaseUserManager,
+                 database_product_manager: DataBaseProductManager,
+                 database_orders_manager: DataBaseOrdersManager,
                  user_id: int, type_avt: str) -> None:
         super().__init__()
         ui_path = get_abs_path('system_file', 'main_window.ui')
@@ -31,6 +34,7 @@ class MainWindow(QMainWindow):
 
         self.database_user_manager: DataBaseUserManager = database_user_manager
         self.database_product_manager: DataBaseProductManager = database_product_manager
+        self.database_orders_manager: DataBaseOrdersManager = database_orders_manager
         self.recommender: Recommender = Recommender(self.database_product_manager)
         self.product_table: ProductTable = ProductTable(self.tableWidget)
         self.menu: SlidingMenu = SlidingMenu(self, self)
@@ -43,6 +47,7 @@ class MainWindow(QMainWindow):
         self.toggle_btn.clicked.connect(self.toggle_menu)
         self.popolnenie_balans_btn.clicked.connect(self.switch_to_balans_window)
         self.basket_btn.clicked.connect(self.switch_to_basket)
+        self.name_button.clicked.connect(self.switch_to_profile)
 
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setVisible(False)
@@ -86,8 +91,8 @@ class MainWindow(QMainWindow):
     def update_name_label(self) -> None:
         """Обновляет отображение имени пользователя"""
         name = self.database_user_manager.get_name_by_id(self.user_id)
-        self.name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.name_label.setText(name)
+        # self.name_button.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.name_button.setText(name)
 
     def switch_of_for_admin(self) -> None:
         """Переход в окно администратора"""
@@ -128,17 +133,29 @@ class MainWindow(QMainWindow):
         self.basket_window: BasketWindow = BasketWindow(self.user_id,
                                                         self.database_user_manager,
                                                         self.database_product_manager,
+                                                        self.database_orders_manager,
                                                         self.basket)
         self.basket_window.basket_updated.connect(self.close_basket_window)
         self.hide()
         self.basket_window.show()
+
+    def switch_to_profile(self):
+        self.profile_window: ProfileWindow = ProfileWindow(self.database_user_manager,
+                                                           self.database_product_manager,
+                                                           self.database_orders_manager,
+                                                           self.user_id)
+        self.profile_window.back_signal.connect(self.show)
+        self.hide()
+        self.profile_window.show()
 
 
 if __name__ == "__main__":
     app: QApplication = QApplication(sys.argv)
     database_user_manager: DataBaseUserManager = DataBaseUserManager()
     database_product_manager: DataBaseProductManager = DataBaseProductManager()
+    database_orders_manager: DataBaseOrdersManager = DataBaseOrdersManager()
 
-    main_window: MainWindow = MainWindow(database_user_manager, database_product_manager, 100, 'Admin')
+    main_window: MainWindow = MainWindow(database_user_manager, database_product_manager,
+                                         database_orders_manager, 100, 'Admin')
     main_window.show()
     sys.exit(app.exec())

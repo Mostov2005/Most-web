@@ -563,7 +563,7 @@ border: 3px solid rgb(92, 83, 220);</string>
 </string>
     </property>
     <property name="text">
-     <string>В главное меню</string>
+     <string>Назад</string>
     </property>
    </widget>
    <zorder>label</zorder>

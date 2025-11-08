@@ -1,10 +1,10 @@
 import sys
-import qt_env
-
 from typing import Any
 
 from PyQt6.QtWidgets import QApplication
-from database import DataBaseUserManager, DataBaseProductManager
+
+import qt_env  # noqa: F401
+from database import DataBaseUserManager, DataBaseProductManager, DataBaseOrdersManager
 from ui import WelcomeWindow, MainWindow
 
 
@@ -17,6 +17,7 @@ class MostWeb:
         # Менеджеры работы с базой данных
         self.database_user_manager: DataBaseUserManager = DataBaseUserManager()
         self.database_product_manager: DataBaseProductManager = DataBaseProductManager()
+        self.database_orders_manager: DataBaseOrdersManager = DataBaseOrdersManager()
 
         # Окно приветствия
         self.welcome_window: WelcomeWindow = WelcomeWindow(self.database_user_manager)
@@ -34,6 +35,7 @@ class MostWeb:
         main_window: MainWindow = MainWindow(
             self.database_user_manager,
             self.database_product_manager,
+            self.database_orders_manager,
             id_user,
             type_avt
         )

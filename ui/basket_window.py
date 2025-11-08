@@ -21,6 +21,7 @@ class BasketWindow(QMainWindow):
                  user_id: int,
                  database_user_manager: DataBaseUserManager,
                  database_product_manager: DataBaseProductManager,
+                 database_orders_manager: DataBaseOrdersManager,
                  basket: dict[int, int]
                  ) -> None:
         super().__init__()
@@ -31,7 +32,7 @@ class BasketWindow(QMainWindow):
 
         self.database_user_manager: DataBaseUserManager = database_user_manager
         self.database_product_manager: DataBaseProductManager = database_product_manager
-        self.database_orders_manager: DataBaseOrdersManager = DataBaseOrdersManager()
+        self.database_orders_manager: DataBaseOrdersManager = database_orders_manager
         self.basket: dict[int, int] = basket
         self.user_id: int = user_id
         self.balans: int = 0
@@ -69,6 +70,7 @@ class BasketWindow(QMainWindow):
 
     def populate_table(self) -> None:
         """Заполняет таблицу корзины товарами и считает итоговую сумму"""
+
         def create_item(text: str) -> QTableWidgetItem:
             item = QTableWidgetItem(text)
             item.setFont(self.font)
@@ -208,7 +210,7 @@ class BasketWindow(QMainWindow):
         )
 
         for product, quantity in self.basket.items():
-            self.database_orders_manager.write_row(product, self.user_id, quantity)
+            self.database_orders_manager.write_row(product, self.user_id, quantity, address)
         self.database_orders_manager.save()
 
         self.basket.clear()
@@ -227,10 +229,12 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     database_product_manager: DataBaseProductManager = DataBaseProductManager()
     database_user_manager: DataBaseUserManager = DataBaseUserManager()
+    database_orders_manager: DataBaseOrdersManager = DataBaseOrdersManager()
     basket_window: BasketWindow = BasketWindow(
         user_id=100,
         database_user_manager=database_user_manager,
         database_product_manager=database_product_manager,
+        database_orders_manager=database_orders_manager,
         basket={0: 1, 2: 2, 7: 1}
     )
     basket_window.show()

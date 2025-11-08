@@ -20,8 +20,7 @@ class DataBaseOrdersManager:
             self.orders = pd.read_csv(
                 self.file_path,
                 encoding='UTF-8',
-                index_col="id_product",
-                dtype={"user_id": int, "quantity": int},
+                dtype={"id_product":int, "user_id": int, "quantity": int, 'address': str},
                 parse_dates=["purchase_datetime"]
             )
         except Exception as e:
@@ -31,7 +30,10 @@ class DataBaseOrdersManager:
         """Получение всех заказов"""
         return self.orders
 
-    def write_row(self, product_id: int, user_id: int, quantity: int) -> None:
+    def get_orders_by_id(self, product_id: int) -> pd.DataFrame:
+        return self.orders.loc[self.orders['user_id'] == product_id]
+
+    def write_row(self, product_id: int, user_id: int, quantity: int, address: str) -> None:
         """Добавление нового заказа"""
         now: datetime = datetime.now()
         formatted_date: str = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -39,18 +41,25 @@ class DataBaseOrdersManager:
             'id_product': product_id,
             'user_id': user_id,
             'purchase_datetime': formatted_date,
-            'quantity': quantity
+            'quantity': quantity,
+            'address': address
         }
 
     def save(self) -> None:
         """Сохраняет все изменения в CSV"""
         self.orders.to_csv(
             self.file_path,
-            index=True,
-            index_label="id_product",
+            index=False,
             encoding='UTF-8'
         )
 
 
 if __name__ == "__main__":
     database_product_manager: DataBaseOrdersManager = DataBaseOrdersManager()
+    # database_product_manager.write_row(
+    #     product_id=1,
+    #     user_id=100,
+    #     quantity=1,
+    #     address=" ")
+    # print(database_product_manager.get_orders_by_id(100))
+    # database_product_manager.save()

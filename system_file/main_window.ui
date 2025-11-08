@@ -506,28 +506,6 @@
      <string>+ 0₽</string>
     </property>
    </widget>
-   <widget class="QLabel" name="name_label">
-    <property name="geometry">
-     <rect>
-      <x>1540</x>
-      <y>25</y>
-      <width>380</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>18</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">                    border-radius: 10px;
-                    border: 3px solid rgb(92, 83, 220);</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Mostov&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="toggle_btn">
     <property name="geometry">
      <rect>
@@ -1037,6 +1015,41 @@
     </property>
     <property name="text">
      <string>Меню товаров</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="name_button">
+    <property name="geometry">
+     <rect>
+      <x>1540</x>
+      <y>25</y>
+      <width>380</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+
+
+#name_button {
+                    border-radius: 10px;
+                    border: 3px solid rgb(92, 83, 220);
+}
+#name_button:hover {
+                background-color: rgb(201, 187, 255)
+}
+#name_button:pressed {
+	background-color: rgb(81, 6, 100)
+}
+
+</string>
+    </property>
+    <property name="text">
+     <string>Mostov</string>
     </property>
    </widget>
   </widget>

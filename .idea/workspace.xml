@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Новая структура проекта">
-      <change afterPath="$PROJECT_DIR$/qt_env.py" afterDir="false" />
+    <list default="true" id="447bb8a9-db5c-4693-982d-8ef0f0b14dee" name="Changes" comment="Починка цветовой темы (Появилась проблема при переходе на windows 11 и применении темной темы)">
+      <change afterPath="$PROJECT_DIR$/ui/profile_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database_orders_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database_orders_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/main_window.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/orders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/orders.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_file/plus_balans.ui" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/plus_balans.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system_file/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/system_file/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/admin_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/admin_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/balance_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/balance_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/basket_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/basket_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/info_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/info_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/registration_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/registration_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/welcome_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/welcome_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/worker_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/worker_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/product_dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/product_dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/product_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/product_table.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/product_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/product_widget.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +43,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Mostov2005&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Mostov2005/Most-web.git&quot;,
+    &quot;accountId&quot;: &quot;0e02f68f-c300-4710-8aaf-4630eec98f07&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -78,6 +86,7 @@
     "Python.product_dialog.executor": "Run",
     "Python.product_table.executor": "Run",
     "Python.product_widget.executor": "Run",
+    "Python.profile_window.executor": "Run",
     "Python.recommender.executor": "Run",
     "Python.registration_window.executor": "Run",
     "Python.sliding_menu.executor": "Run",
@@ -100,8 +109,8 @@
       <recent name="C:\Pycharm Project\Most-web" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.sliding_menu">
-    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,7 +123,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -123,7 +132,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="admin_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="basket_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,7 +145,29 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/admin_window.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/basket_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="database_orders_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Most-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/database_orders_manager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -167,29 +198,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="product_dialog" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Most-web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/product_dialog.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="registration_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -202,7 +211,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/registration_window.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/main_window.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -211,29 +220,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="sliding_menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Most-web" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/sliding_menu.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="worker_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="profile_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Most-web" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -246,7 +233,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/worker_window.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/profile_window.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -257,11 +244,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.sliding_menu" />
-        <item itemvalue="Python.product_dialog" />
-        <item itemvalue="Python.admin_window" />
-        <item itemvalue="Python.worker_window" />
-        <item itemvalue="Python.1" />
+        <item itemvalue="Python.main_window" />
+        <item itemvalue="Python.profile_window" />
+        <item itemvalue="Python.database_orders_manager" />
+        <item itemvalue="Python.2" />
+        <item itemvalue="Python.basket_window" />
       </list>
     </recent_temporary>
   </component>
@@ -377,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762114177991</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Починка цветовой темы (Появилась проблема при переходе на windows 11 и применении темной темы)">
+      <option name="closed" value="true" />
+      <created>1762360709471</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762360709471</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -404,6 +399,7 @@
     <MESSAGE value="Продукты в csv" />
     <MESSAGE value="Рабочее окно работников (worker_window)" />
     <MESSAGE value="Окно корзины и менеджер логов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Окно корзины и менеджер логов" />
+    <MESSAGE value="Починка цветовой темы (Появилась проблема при переходе на windows 11 и применении темной темы)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Починка цветовой темы (Появилась проблема при переходе на windows 11 и применении темной темы)" />
   </component>
 </project>
